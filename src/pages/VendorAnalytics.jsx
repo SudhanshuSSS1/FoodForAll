@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function VendorAnalytics() {
   return (
-    <div className="bg-[#001206] text-[#ccfcd8] min-h-screen font-body pt-16">
+    <div className="bg-surface text-on-surface min-h-screen font-body pt-16">
       {/* SideNavBar Anchor */}
-      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-[#001f0e] shadow-md p-6 space-y-2 z-40 border-r border-[#255036]/30">
+      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container shadow-md p-6 space-y-2 z-40 border-r border-outline-variant/30">
         <div className="flex items-center space-x-3 p-3 mb-12">
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden shrink-0">
             <img 
@@ -58,7 +58,7 @@ export default function VendorAnalytics() {
             <h2 className="font-headline-lg text-[32px] font-bold text-on-surface">Analytics Overview</h2>
           </div>
           <div className="flex gap-3">
-            <button className="px-6 py-2 rounded-lg border border-[#537f61]/40 text-on-surface-variant font-bold text-[14px] hover:bg-surface-variant transition-colors flex items-center gap-2 cursor-pointer">
+            <button className="px-6 py-2 rounded-lg border border-outline/40 text-on-surface-variant font-bold text-[14px] hover:bg-surface-variant transition-colors flex items-center gap-2 cursor-pointer">
               <span className="material-symbols-outlined text-[18px]">calendar_today</span>
               Last 7 Days
             </button>
@@ -244,7 +244,7 @@ export default function VendorAnalytics() {
       </main>
 
       {/* Mobile Navigation Shell */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#001809] border-t border-[#255036]/50 px-6 py-3 flex justify-around items-center z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/50 px-6 py-3 flex justify-around items-center z-50">
         <Link className="flex flex-col items-center space-y-1 text-on-surface-variant hover:text-primary transition-colors" to="/vendor/dashboard">
           <span className="material-symbols-outlined">dashboard</span>
           <span className="text-[10px]">Home</span>

@@ -129,7 +129,7 @@ export default function UserRegistration() {
 
         {/* Right Side: Registration Form */}
         <div className="flex-1 w-full max-w-xl">
-          <div className="bg-[#001f0e]/60 backdrop-blur-md rounded-[2.5rem] p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-[#255036]/50">
+          <div className="bg-surface-container/60 backdrop-blur-md rounded-[2.5rem] p-8 sm:p-12 shadow-2xl relative overflow-hidden border border-outline-variant/50">
             {/* Progress Bar (Subtle) */}
             <div className="absolute top-0 left-0 w-full h-1 bg-surface-container-highest">
               <div 
@@ -241,7 +241,7 @@ export default function UserRegistration() {
       {/* Success Modal */}
       {showSuccess && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-6">
-          <div className="bg-[#001f0e]/60 backdrop-blur-md max-w-md w-full rounded-[2.5rem] p-12 text-center space-y-6 border border-[#255036]/50 animate-[pulse_0.3s_ease-out]">
+          <div className="bg-surface-container/60 backdrop-blur-md max-w-md w-full rounded-[2.5rem] p-12 text-center space-y-6 border border-outline-variant/50 animate-[pulse_0.3s_ease-out]">
             <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <span className="material-symbols-outlined text-primary text-[48px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
             </div>

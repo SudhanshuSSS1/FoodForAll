@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function VendorInventory() {
   return (
-    <div className="bg-[#001206] text-[#ccfcd8] min-h-screen font-body pt-16">
+    <div className="bg-surface text-on-surface min-h-screen font-body pt-16">
       {/* SideNavBar Anchor */}
-      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-[#001f0e] shadow-md p-6 space-y-2 z-40 border-r border-[#255036]/30">
+      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container shadow-md p-6 space-y-2 z-40 border-r border-outline-variant/30">
         <div className="flex items-center space-x-3 p-3 mb-12">
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden shrink-0">
             <img 
@@ -75,30 +75,30 @@ export default function VendorInventory() {
 
         {/* Metrics Bento Grid (High-end UI Pattern) */}
         <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-primary hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-primary hover:bg-surface-container transition-colors">
             <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Total Stock</span>
             <div className="flex items-end justify-between mt-4">
               <span className="font-display-lg text-[48px] font-bold text-primary leading-none">1,284</span>
-              <span className="text-[#5ff077] text-[12px] font-medium flex items-center mb-1 bg-[#5ff077]/10 px-2 py-0.5 rounded-full">
+              <span className="text-primary-dim text-[12px] font-medium flex items-center mb-1 bg-primary-dim/10 px-2 py-0.5 rounded-full">
                 <span className="material-symbols-outlined text-[14px] mr-1">trending_up</span>+12%
               </span>
             </div>
           </div>
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
             <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Ready to List</span>
             <div className="flex items-end justify-between mt-4">
               <span className="font-display-lg text-[48px] font-bold text-tertiary leading-none">42</span>
               <span className="text-tertiary-fixed-dim text-[12px] font-medium mb-1 bg-tertiary-fixed-dim/10 px-2 py-0.5 rounded-full">High Priority</span>
             </div>
           </div>
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-error hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-error hover:bg-surface-container transition-colors">
             <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Expiring Soon</span>
             <div className="flex items-end justify-between mt-4">
               <span className="font-display-lg text-[48px] font-bold text-error leading-none">12</span>
               <span className="text-error-dim text-[12px] font-medium mb-1 bg-error-dim/10 px-2 py-0.5 rounded-full">Next 24h</span>
             </div>
           </div>
-          <div className="relative overflow-hidden bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl group cursor-pointer border-l-4 border-l-secondary hover:bg-surface-container transition-colors">
+          <div className="relative overflow-hidden bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl group cursor-pointer border-l-4 border-l-secondary hover:bg-surface-container transition-colors">
             <div className="relative z-10">
               <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Inventory Health</span>
               <div className="mt-4 h-2 bg-surface-variant rounded-full overflow-hidden">
@@ -110,8 +110,8 @@ export default function VendorInventory() {
         </section>
 
         {/* Inventory Table Section */}
-        <div className="bg-surface-container/60 backdrop-blur-md rounded-2xl overflow-hidden border border-[#255036]">
-          <div className="p-6 flex items-center justify-between bg-surface-container-high/50 border-b border-[#255036]">
+        <div className="bg-surface-container/60 backdrop-blur-md rounded-2xl overflow-hidden border border-outline-variant">
+          <div className="p-6 flex items-center justify-between bg-surface-container-high/50 border-b border-outline-variant">
             <h3 className="font-headline-md text-[24px] font-bold text-on-surface">Items in Stock</h3>
             <div className="flex items-center space-x-2">
               <button className="p-2 hover:bg-surface-variant rounded-lg transition-colors cursor-pointer text-on-surface-variant">
@@ -125,7 +125,7 @@ export default function VendorInventory() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="border-b border-[#255036]">
+                <tr className="border-b border-outline-variant">
                   <th className="px-6 py-4 font-label-md text-[12px] font-bold text-on-surface-variant uppercase tracking-wider">Item Name</th>
                   <th className="px-6 py-4 font-label-md text-[12px] font-bold text-on-surface-variant uppercase tracking-wider">Category</th>
                   <th className="px-6 py-4 font-label-md text-[12px] font-bold text-on-surface-variant uppercase tracking-wider">Stock Level</th>
@@ -133,7 +133,7 @@ export default function VendorInventory() {
                   <th className="px-6 py-4 font-label-md text-[12px] font-bold text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#255036]/50">
+              <tbody className="divide-y divide-outline-variant/50">
                 {/* Row 1 */}
                 <tr className="hover:bg-primary/5 transition-colors group">
                   <td className="px-6 py-4">
@@ -230,7 +230,7 @@ export default function VendorInventory() {
               </tbody>
             </table>
           </div>
-          <div className="p-6 bg-surface-container-low border-t border-[#255036] flex items-center justify-between">
+          <div className="p-6 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
             <p className="text-[12px] text-on-surface-variant">Showing 1 to 10 of 248 items</p>
             <div className="flex items-center space-x-2">
               <button className="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant cursor-pointer">
@@ -248,7 +248,7 @@ export default function VendorInventory() {
       </main>
 
       {/* Mobile Navigation Shell */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#001809] border-t border-[#255036]/50 px-6 py-3 flex justify-around items-center z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/50 px-6 py-3 flex justify-around items-center z-50">
         <Link className="flex flex-col items-center space-y-1 text-on-surface-variant hover:text-primary transition-colors" to="/vendor/dashboard">
           <span className="material-symbols-outlined">dashboard</span>
           <span className="text-[10px]">Home</span>

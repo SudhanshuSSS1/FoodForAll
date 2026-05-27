@@ -53,7 +53,7 @@ export default function VendorDashboard() {
 
   return (
     <>
-      <div className="flex pt-16 bg-[#fbf9f5] min-h-screen">
+      <div className="flex pt-16 bg-surface min-h-screen">
       {/* SideNavBar */}
       <aside className="h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container flex-col p-6 space-y-2 shadow-md hidden lg:flex border-r border-outline-variant/20 z-40">
         <div className="flex items-center space-x-3 mb-8">
@@ -98,13 +98,13 @@ export default function VendorDashboard() {
       </aside>
 
       {/* Main Content Canvas */}
-      <main className="flex-grow lg:ml-64 p-6 lg:p-12 pb-24 md:pb-12 min-h-screen text-[#1b1c1a]">
+      <main className="flex-grow lg:ml-64 p-6 lg:p-12 pb-24 md:pb-12 min-h-screen text-on-surface">
         <div className="max-w-[1000px] mx-auto space-y-8">
           
           {/* Welcome Section */}
           <header>
-            <h1 className="font-headline text-headline-lg text-[#1b1c1a]">Vendor Dashboard</h1>
-            <p className="font-body text-body-md text-[#1b1c1a]/70">Good morning, Green Grocers. Let's make sure no good food goes to waste today.</p>
+            <h1 className="font-headline text-headline-lg text-on-surface">Vendor Dashboard</h1>
+            <p className="font-body text-body-md text-on-surface/70">Good morning, Green Grocers. Let's make sure no good food goes to waste today.</p>
           </header>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -113,17 +113,17 @@ export default function VendorDashboard() {
             <section className="md:col-span-5 bg-white rounded-2xl shadow-[0px_4px_20px_rgba(62,123,68,0.08)] p-6">
               <div className="flex items-center space-x-2 mb-6">
                 <span className="material-symbols-outlined text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>bolt</span>
-                <h2 className="font-headline text-[24px] font-semibold text-[#1b1c1a]">Quick List Surplus</h2>
+                <h2 className="font-headline text-[24px] font-semibold text-on-surface">Quick List Surplus</h2>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1">
-                  <label className="font-label text-label-md text-[#1b1c1a]/70">Item Name</label>
-                  <input required className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="e.g., Organic Bananas (Bunch)" type="text" />
+                  <label className="font-label text-label-md text-on-surface/70">Item Name</label>
+                  <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="e.g., Organic Bananas (Bunch)" type="text" />
                 </div>
                 <div className="space-y-1">
-                  <label className="font-label text-label-md text-[#1b1c1a]/70">Category</label>
+                  <label className="font-label text-label-md text-on-surface/70">Category</label>
                   <div className="relative">
-                    <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 pl-4 pr-10 font-body outline-none appearance-none cursor-pointer text-[#1b1c1a]">
+                    <select required value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 pl-4 pr-10 font-body outline-none appearance-none cursor-pointer text-on-surface">
                       <option value="" disabled>Select a category...</option>
                       <option value="bakery">Bakery</option>
                       <option value="produce">Produce</option>
@@ -132,16 +132,16 @@ export default function VendorDashboard() {
                       <option value="pantry">Pantry Items</option>
                       <option value="other">Other</option>
                     </select>
-                    <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#1b1c1a]/50 pointer-events-none">expand_more</span>
+                    <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface/50 pointer-events-none">expand_more</span>
                   </div>
                   {category === 'other' && (
                     <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-200">
-                      <input required className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="Please specify category..." type="text" />
+                      <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="Please specify category..." type="text" />
                     </div>
                   )}
                 </div>
                 <div className="space-y-1">
-                  <label className="font-label text-label-md text-[#1b1c1a]/70">Item Image</label>
+                  <label className="font-label text-label-md text-on-surface/70">Item Image</label>
                   {photoDataUri ? (
                     <div className="relative rounded-lg overflow-hidden border-2 border-primary/50 w-full h-48 group">
                       <img src={photoDataUri} alt="Captured surplus" className="w-full h-full object-cover" />
@@ -158,7 +158,7 @@ export default function VendorDashboard() {
                     </div>
                   ) : (
                     <div className="flex gap-4">
-                      <label className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors">
+                      <label className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-on-surface/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors">
                         <span className="material-symbols-outlined text-[28px] mb-2">upload_file</span>
                         <span className="font-label text-label-md">Upload Photo</span>
                         <input type="file" accept="image/*" className="hidden" onChange={(e) => {
@@ -172,7 +172,7 @@ export default function VendorDashboard() {
                       <button 
                         type="button"
                         onClick={startCamera}
-                        className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors"
+                        className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-on-surface/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors"
                       >
                         <span className="material-symbols-outlined text-[28px] mb-2">photo_camera</span>
                         <span className="font-label text-label-md">Take Photo</span>
@@ -182,17 +182,17 @@ export default function VendorDashboard() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="font-label text-label-md text-[#1b1c1a]/70">Quantity</label>
-                    <input required className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="5kg / 3 units" type="text" />
+                    <label className="font-label text-label-md text-on-surface/70">Quantity</label>
+                    <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="5kg / 3 units" type="text" />
                   </div>
                   <div className="space-y-1">
-                    <label className="font-label text-label-md text-[#1b1c1a]/70">Expiry Time</label>
-                    <input required className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" type="time" />
+                    <label className="font-label text-label-md text-on-surface/70">Expiry Time</label>
+                    <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" type="time" />
                   </div>
                 </div>
                 
                 <div className="space-y-1">
-                  <label className="font-label text-label-md text-[#1b1c1a]/70">Pricing</label>
+                  <label className="font-label text-label-md text-on-surface/70">Pricing</label>
                   <div className="flex space-x-2">
                     <button 
                       type="button"
@@ -200,7 +200,7 @@ export default function VendorDashboard() {
                       className={`flex-1 py-3 px-4 rounded-lg font-label text-label-md flex items-center justify-center space-x-2 transition-all cursor-pointer ${
                         pricingType === 'free'
                           ? 'border-2 border-primary bg-primary-container/10 text-primary font-bold'
-                          : 'border-2 border-transparent bg-[#fbf9f5] text-[#1b1c1a]/70 hover:bg-[#fbf9f5]/80'
+                          : 'border-2 border-transparent bg-surface text-on-surface/70 hover:bg-surface/80'
                       }`}
                     >
                       <span className="material-symbols-outlined text-[18px]">volunteer_activism</span>
@@ -212,7 +212,7 @@ export default function VendorDashboard() {
                       className={`flex-1 py-3 px-4 rounded-lg font-label text-label-md flex items-center justify-center space-x-2 transition-all cursor-pointer ${
                         pricingType === 'low-cost'
                           ? 'border-2 border-primary bg-primary-container/10 text-primary font-bold'
-                          : 'border-2 border-transparent bg-[#fbf9f5] text-[#1b1c1a]/70 hover:bg-[#fbf9f5]/80'
+                          : 'border-2 border-transparent bg-surface text-on-surface/70 hover:bg-surface/80'
                       }`}
                     >
                       <span className="material-symbols-outlined text-[18px]">payments</span>
@@ -221,10 +221,10 @@ export default function VendorDashboard() {
                   </div>
                   {pricingType === 'low-cost' && (
                     <div className="mt-4 space-y-1 animate-in fade-in slide-in-from-top-2 duration-200">
-                      <label className="font-label text-label-md text-[#1b1c1a]/70">Set Price ($)</label>
+                      <label className="font-label text-label-md text-on-surface/70">Set Price ($)</label>
                       <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#1b1c1a]/50 font-body font-bold">$</span>
-                        <input required type="number" step="0.01" min="0" className="w-full bg-[#fbf9f5] border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 pl-8 pr-4 font-body outline-none" placeholder="e.g. 2.50" />
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/50 font-body font-bold">$</span>
+                        <input required type="number" step="0.01" min="0" className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 pl-8 pr-4 font-body outline-none" placeholder="e.g. 2.50" />
                       </div>
                     </div>
                   )}
@@ -278,13 +278,13 @@ export default function VendorDashboard() {
           
           {/* Active Listings Table */}
           <section className="bg-white rounded-2xl shadow-[0px_4px_20px_rgba(62,123,68,0.08)] overflow-hidden border border-outline-variant/10">
-            <div className="p-6 flex justify-between items-center border-b border-[#fbf9f5]">
+            <div className="p-6 flex justify-between items-center border-b border-surface">
               <div className="flex items-center space-x-2">
                 <span className="material-symbols-outlined text-primary">list_alt</span>
-                <h2 className="font-headline text-[24px] font-semibold text-[#1b1c1a]">Active Listings</h2>
+                <h2 className="font-headline text-[24px] font-semibold text-on-surface">Active Listings</h2>
               </div>
               <div className="flex space-x-2">
-                <button className="p-2 rounded-full hover:bg-[#fbf9f5] transition-colors cursor-pointer text-[#1b1c1a]/70">
+                <button className="p-2 rounded-full hover:bg-surface transition-colors cursor-pointer text-on-surface/70">
                   <span className="material-symbols-outlined">filter_list</span>
                 </button>
                 <button className="text-primary font-label text-label-md font-bold hover:underline cursor-pointer">View All</button>
@@ -292,31 +292,31 @@ export default function VendorDashboard() {
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-[#fbf9f5]">
+                <thead className="bg-surface">
                   <tr>
-                    <th className="px-6 py-4 font-label text-label-md text-[#1b1c1a]/70 font-semibold uppercase tracking-wider text-xs">Item Detail</th>
-                    <th className="px-6 py-4 font-label text-label-md text-[#1b1c1a]/70 font-semibold uppercase tracking-wider text-xs">Quantity</th>
-                    <th className="px-6 py-4 font-label text-label-md text-[#1b1c1a]/70 font-semibold uppercase tracking-wider text-xs">Expires In</th>
-                    <th className="px-6 py-4 font-label text-label-md text-[#1b1c1a]/70 font-semibold uppercase tracking-wider text-xs">Status</th>
-                    <th className="px-6 py-4 font-label text-label-md text-[#1b1c1a]/70 font-semibold uppercase tracking-wider text-xs text-right">Action</th>
+                    <th className="px-6 py-4 font-label text-label-md text-on-surface/70 font-semibold uppercase tracking-wider text-xs">Item Detail</th>
+                    <th className="px-6 py-4 font-label text-label-md text-on-surface/70 font-semibold uppercase tracking-wider text-xs">Quantity</th>
+                    <th className="px-6 py-4 font-label text-label-md text-on-surface/70 font-semibold uppercase tracking-wider text-xs">Expires In</th>
+                    <th className="px-6 py-4 font-label text-label-md text-on-surface/70 font-semibold uppercase tracking-wider text-xs">Status</th>
+                    <th className="px-6 py-4 font-label text-label-md text-on-surface/70 font-semibold uppercase tracking-wider text-xs text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#fbf9f5]">
+                <tbody className="divide-y divide-surface">
                   {/* Row 1 */}
-                  <tr className="hover:bg-[#fbf9f5]/50 transition-colors group">
+                  <tr className="hover:bg-surface/50 transition-colors group">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-3">
                         <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
                           <img alt="Fresh Greens" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqv9w21iobp7ZMuztv-7OstJ2KMZ3q1wu_c1B4GX1ofUW3kp57T7bRPCNa8T0cINgTuQZdXiOTloiUBdhfQeYoZwaTcdWpYIp-JUkENxiTwlDr_PPChYo74jkAawZosGy6kmCaSnqnJck_3jdq5dxOnws7nTEloSsnxcOlBMn8uTXRUwp1rNiqc1T1oS0-sv-KtffZkI4ErJFbC8w7r4Qtic8BT_rwcVeNYnINqFHmQGM5lfzOKoayoYbrVK9Wl7HzRvtyXDvicWXw" />
                         </div>
                         <div>
-                          <p className="font-label font-bold text-[#1b1c1a]">Fresh Kale Mix</p>
-                          <p className="font-caption text-[#1b1c1a]/60">Listed 2h ago</p>
+                          <p className="font-label font-bold text-on-surface">Fresh Kale Mix</p>
+                          <p className="font-caption text-on-surface/60">Listed 2h ago</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a] whitespace-nowrap">12 Bags</td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a] whitespace-nowrap">45m</td>
+                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">12 Bags</td>
+                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">45m</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-primary-container/20 text-primary-container font-label text-[12px] font-bold rounded-full">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
@@ -324,50 +324,50 @@ export default function VendorDashboard() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-[#1b1c1a]/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
                     </td>
                   </tr>
                   
                   {/* Row 2 */}
-                  <tr className="hover:bg-[#fbf9f5]/50 transition-colors group">
+                  <tr className="hover:bg-surface/50 transition-colors group">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-3">
                         <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
                           <img alt="Orange Slices" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBZyHDEoIIrJzDoGKKDhK0AyACdU_cy6A9nrHN1RBuZvreOJ3HH7TRTvlpg7FmF_zrpI-HjexXsYYUeajiepDRUlDl9CFZBLwSm-bexuMtv1-QmIvNhWX7G5dz9M2tVJAMV5RLA49AfnPx4GUSQnQjLyqPRxy-XVljJ44eysX_NCwqvhxBT-kYvf2ifEgKK5EIgX2WdduZHJZzYSRreHue0B72jMtZusGHgTeqMpbNFdT75Z5U24UJkkSOFG3zVpvpB30mS0bvr40n" />
                         </div>
                         <div>
-                          <p className="font-label font-bold text-[#1b1c1a]">Sunkist Oranges</p>
-                          <p className="font-caption text-[#1b1c1a]/60">Listed 4h ago</p>
+                          <p className="font-label font-bold text-on-surface">Sunkist Oranges</p>
+                          <p className="font-caption text-on-surface/60">Listed 4h ago</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a] whitespace-nowrap">4 Boxes</td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a]/50 whitespace-nowrap">Expired</td>
+                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">4 Boxes</td>
+                    <td className="px-6 py-4 font-body text-on-surface/50 whitespace-nowrap">Expired</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-secondary-container/20 text-on-secondary-container font-label text-[12px] font-bold rounded-full">
                         <span>Claimed</span>
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-[#1b1c1a]/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
                     </td>
                   </tr>
                   
                   {/* Row 3 */}
-                  <tr className="hover:bg-[#fbf9f5]/50 transition-colors group">
+                  <tr className="hover:bg-surface/50 transition-colors group">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center space-x-3">
                         <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
                           <img alt="Sourdough Bread" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRTuOn3AjmH2T1y2WkZjzwYeWCQKj-w7E2VcZBtiIImzqAnLZWIq5qa6fQxswa0SPDZMDaRxsRfx5nbM0js8Lq67MxUHaZzJunQpgz-PyUiyMo0bNFXEaNi3aYoIpZdj6Vuyv6ICofP_wDNBc67hpHC9yosHpQ5ut2UyEkJG20Au9ygjcS6l93rpse4TGAEMu6ml7mkEMRLuQtFe08LJjzVsW_JFS-h7DqS2PyjnJ3qbYS7BabwC7SlEL0Bwx8syn0EXC7XWIIHQQb" />
                         </div>
                         <div>
-                          <p className="font-label font-bold text-[#1b1c1a]">Daily Sourdough</p>
-                          <p className="font-caption text-[#1b1c1a]/60">Listed 15m ago</p>
+                          <p className="font-label font-bold text-on-surface">Daily Sourdough</p>
+                          <p className="font-caption text-on-surface/60">Listed 15m ago</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a] whitespace-nowrap">8 Loaves</td>
-                    <td className="px-6 py-4 font-body text-[#1b1c1a] whitespace-nowrap">6h</td>
+                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">8 Loaves</td>
+                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">6h</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-primary-container/20 text-primary-container font-label text-[12px] font-bold rounded-full">
                         <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
@@ -375,7 +375,7 @@ export default function VendorDashboard() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-[#1b1c1a]/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
                     </td>
                   </tr>
                 </tbody>

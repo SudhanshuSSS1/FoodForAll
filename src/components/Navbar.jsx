@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  const handleThemeToggle = () => {
+    if (theme === 'system') setTheme('light');
+    else if (theme === 'light') setTheme('dark');
+    else setTheme('system');
+  };
+
+  const getThemeIcon = () => {
+    if (theme === 'light') return 'light_mode';
+    if (theme === 'dark') return 'dark_mode';
+    return 'desktop_windows';
+  };
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-surface shadow-[0px_4px_20px_rgba(62,123,68,0.2)]">
@@ -28,6 +42,14 @@ export default function Navbar() {
 
         {/* Right CTA / Hamburger */}
         <div className="flex items-center gap-4">
+          <button 
+            onClick={handleThemeToggle}
+            className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-variant/50 text-on-surface hover:text-primary transition-colors cursor-pointer"
+            aria-label="Toggle theme"
+            title={`Current theme: ${theme}. Click to switch.`}
+          >
+            <span className="material-symbols-outlined text-[20px]">{getThemeIcon()}</span>
+          </button>
           <div className="hidden sm:flex items-center gap-6 mr-2">
             <Link to="/login" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Log In</Link>
             <Link to="/signup" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Sign Up</Link>

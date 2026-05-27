@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 export default function VendorListings() {
   return (
-    <div className="bg-[#001206] text-[#ccfcd8] min-h-screen font-body pt-16">
+    <div className="bg-surface text-on-surface min-h-screen font-body pt-16">
       {/* SideNavBar Anchor */}
-      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-[#001f0e] shadow-md p-6 space-y-2 z-40 border-r border-[#255036]/30">
+      <aside className="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container shadow-md p-6 space-y-2 z-40 border-r border-outline-variant/30">
         <div className="flex items-center space-x-3 p-3 mb-12">
           <div className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden shrink-0">
             <img 
@@ -69,26 +69,26 @@ export default function VendorListings() {
 
         {/* Stats Overview Bento (Briefly) */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl border-l-4 border-l-primary hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-primary hover:bg-surface-container transition-colors">
             <p className="font-label-md text-[14px] text-on-surface-variant">Active Rescues</p>
             <p className="font-headline-md text-[24px] font-bold text-primary mt-2">12 Items</p>
           </div>
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
             <p className="font-label-md text-[14px] text-on-surface-variant">Claimed Today</p>
             <p className="font-headline-md text-[24px] font-bold text-tertiary mt-2">240kg</p>
           </div>
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl border-l-4 border-l-secondary hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-secondary hover:bg-surface-container transition-colors">
             <p className="font-label-md text-[14px] text-on-surface-variant">Est. Impact</p>
             <p className="font-headline-md text-[24px] font-bold text-secondary mt-2">$1,240</p>
           </div>
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 p-6 rounded-3xl border-l-4 border-l-error hover:bg-surface-container transition-colors">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-error hover:bg-surface-container transition-colors">
             <p className="font-label-md text-[14px] text-on-surface-variant">Expiring Soon</p>
             <p className="font-headline-md text-[24px] font-bold text-error mt-2">3 Items</p>
           </div>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex border-b border-[#255036] mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide gap-2">
+        <div className="flex border-b border-outline-variant mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide gap-2">
           <button className="px-6 py-3 font-bold text-[14px] text-primary border-b-2 border-primary active:scale-95 transition-all">Active (12)</button>
           <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Scheduled (4)</button>
           <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Expired (8)</button>
@@ -98,7 +98,7 @@ export default function VendorListings() {
         {/* Listings Grid (Bento Style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Listing Card 1: Urgent */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
             <div className="relative h-48 overflow-hidden">
               <img 
                 alt="Organic Sourdough" 
@@ -142,7 +142,7 @@ export default function VendorListings() {
           </div>
 
           {/* Listing Card 2: Normal */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
             <div className="relative h-48 overflow-hidden">
               <img 
                 alt="Assorted Tropical Fruits" 
@@ -186,7 +186,7 @@ export default function VendorListings() {
           </div>
 
           {/* Listing Card 3: New Listing CTA */}
-          <button className="border-2 border-dashed border-[#255036] rounded-3xl flex flex-col items-center justify-center p-12 hover:border-primary/60 hover:bg-surface-container-low transition-all group cursor-pointer min-h-[350px]">
+          <button className="border-2 border-dashed border-outline-variant rounded-3xl flex flex-col items-center justify-center p-12 hover:border-primary/60 hover:bg-surface-container-low transition-all group cursor-pointer min-h-[350px]">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <span className="material-symbols-outlined text-primary text-[48px]">add_circle</span>
             </div>
@@ -197,7 +197,7 @@ export default function VendorListings() {
           </button>
 
           {/* Listing Card 4: Detailed Info Layout */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group col-span-1 lg:col-span-2">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group col-span-1 lg:col-span-2">
             <div className="flex flex-col md:flex-row h-full">
               <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
                 <img 
@@ -240,7 +240,7 @@ export default function VendorListings() {
           </div>
 
           {/* Listing Card 5: Expiring Soon Small Card */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-[#537f61]/20 rounded-3xl p-6 flex flex-col justify-between border-l-8 border-l-error">
+          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl p-6 flex flex-col justify-between border-l-8 border-l-error">
             <div>
               <div className="flex justify-between items-start mb-6">
                 <div className="bg-error/10 text-error p-3 rounded-xl flex items-center justify-center">
@@ -261,7 +261,7 @@ export default function VendorListings() {
       </main>
 
       {/* Mobile Navigation Shell */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#001809] border-t border-[#255036]/50 px-6 py-3 flex justify-around items-center z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/50 px-6 py-3 flex justify-around items-center z-50">
         <Link className="flex flex-col items-center space-y-1 text-on-surface-variant hover:text-primary transition-colors" to="/vendor/dashboard">
           <span className="material-symbols-outlined">dashboard</span>
           <span className="text-[10px]">Home</span>

@@ -58,7 +58,7 @@ export default function VendorRegistration() {
       </section>
 
       {/* Right Column - Registration Form */}
-      <section className="bg-[#001f0e]/70 backdrop-blur-md p-8 md:p-12 rounded-[2rem] shadow-2xl border border-primary/10">
+      <section className="bg-surface-container/70 backdrop-blur-md p-8 md:p-12 rounded-[2rem] shadow-2xl border border-primary/10">
         <h2 className="font-headline text-2xl md:text-headline-lg text-on-surface mb-8">Vendor Registration</h2>
         
         <form onSubmit={handleSubmit} className="space-y-6">
