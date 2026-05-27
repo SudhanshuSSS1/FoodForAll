@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | foodForALL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#02e3fc",
+                    "on-primary-fixed": "#004a17",
+                    "on-primary-container": "#002d0b",
+                    "on-primary-fixed-variant": "#006b25",
+                    "surface-tint": "#6eff84",
+                    "background": "#001206",
+                    "surface-container-high": "#002612",
+                    "error-container": "#b92902",
+                    "on-secondary-container": "#e2ffe7",
+                    "primary-container": "#19bc4b",
+                    "surface": "#001206",
+                    "on-error-container": "#ffd2c8",
+                    "surface-dim": "#001206",
+                    "primary-dim": "#5ff077",
+                    "on-tertiary-container": "#004d57",
+                    "on-surface": "#ccfcd8",
+                    "tertiary": "#7fedff",
+                    "on-error": "#450900",
+                    "outline-variant": "#255036",
+                    "secondary-fixed-dim": "#71eca4",
+                    "on-surface-variant": "#88b695",
+                    "outline": "#537f61",
+                    "primary-fixed": "#6eff84",
+                    "surface-bright": "#00341b",
+                    "tertiary-fixed": "#02e3fc",
+                    "tertiary-fixed-dim": "#00d4ec",
+                    "surface-container": "#001f0e",
+                    "error-dim": "#d53d18",
+                    "inverse-on-surface": "#335e42",
+                    "secondary-fixed": "#80fab1",
+                    "on-tertiary-fixed": "#00383f",
+                    "on-tertiary": "#005761",
+                    "tertiary-dim": "#00d4ec",
+                    "surface-container-lowest": "#000000",
+                    "on-secondary": "#005e36",
+                    "surface-variant": "#002d16",
+                    "on-secondary-fixed-variant": "#006a3d",
+                    "secondary": "#80fab1",
+                    "error": "#ff7351",
+                    "on-background": "#ccfcd8",
+                    "on-secondary-fixed": "#004a29",
+                    "primary-fixed-dim": "#5ff077",
+                    "inverse-primary": "#006f27",
+                    "surface-container-highest": "#002d16",
+                    "surface-container-low": "#001809",
+                    "on-tertiary-fixed-variant": "#005762",
+                    "secondary-dim": "#71eca4",
+                    "primary": "#6eff84",
+                    "inverse-surface": "#e9ffec",
+                    "secondary-container": "#006d3f",
+                    "on-primary": "#005f20"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "md": "24px",
+                    "container-max": "1280px",
+                    "xl": "80px",
+                    "lg": "48px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "caption": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .vibrant-glow:focus-within {
+            box-shadow: 0 0 15px rgba(110, 255, 132, 0.3);
+        }
+        .neon-accent {
+            filter: drop-shadow(0 0 8px rgba(2, 227, 252, 0.4));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden min-h-screen flex flex-col">
+<!-- Header Suppression: Handled by focusing strictly on the Login Form journey -->
+<header class="w-full py-md px-gutter flex justify-between items-center max-w-container-max mx-auto">
+<div class="flex items-center gap-sm">
+<img alt="foodForALL Logo" class="h-10 w-10 object-contain rounded-lg" src="https://lh3.googleusercontent.com/aida/ADBb0uh8hX3Gv_lUQqOQV9m1I9hRoM01DpdA6fkfTS_YrCyzqJl4YQSc2P4kw2-Z8Gu8iXiGl3m6GKKcccuKM6FX0DIC_tcR15hBHmVcw8rNK6yQkW9QOOlldlV4b4QZSqMfGTmrfLeJVh8EPqrKWkCiFJupoDw3GiS82C-6CfAxyQhUoYYvCRBZ5P8QPeWcyFgxA1N3lBJ39a30PWzIo4Y0vCVW_esROaL1OX4RsK_GvEatxrfjmja4c2DuQCs"/>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">foodForALL</span>
+</div>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
+            Return to Mission
+        </a>
+</header>
+<main class="flex-grow flex items-center justify-center px-gutter py-xl relative overflow-hidden">
+<!-- Atmospheric Background Elements -->
+<div class="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[300px] h-[300px] bg-tertiary/10 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="w-full max-w-[480px] z-10">
+<!-- Login Card -->
+<div class="bg-surface-container border border-outline-variant/30 rounded-full p-lg md:p-xl shadow-[0px_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+<div class="mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Log in to continue rescuing surplus food.</p>
+</div>
+<!-- Role Toggle -->
+<div class="bg-surface-variant p-1 rounded-xl flex mb-lg relative">
+<div class="absolute h-[calc(100%-8px)] w-[calc(50%-4px)] bg-primary-container rounded-lg transition-all duration-300 transform translate-x-0" id="role-indicator"></div>
+<button class="relative z-10 flex-1 py-base font-label-md text-label-md text-on-primary-container text-center transition-colors duration-300" id="user-toggle" onclick="switchRole('user')">
+                        Community Member
+                    </button>
+<button class="relative z-10 flex-1 py-base font-label-md text-label-md text-on-surface-variant text-center transition-colors duration-300" id="vendor-toggle" onclick="switchRole('vendor')">
+                        Food Vendor
+                    </button>
+</div>
+<form class="space-y-base" id="login-form">
+<!-- Email Field -->
+<div class="space-y-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="email">Email ID</label>
+<div class="relative vibrant-glow rounded-lg">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full bg-surface-container-highest border-none rounded-lg py-sm pl-11 pr-sm text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200" id="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="password">Password</label>
+<div class="relative vibrant-glow rounded-lg">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full bg-surface-container-highest border-none rounded-lg py-sm pl-11 pr-11 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined" id="visibility-icon">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between py-xs">
+<div class="flex items-center gap-xs">
+<input class="w-4 h-4 rounded bg-surface-container-highest border-outline-variant text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="font-caption text-caption text-on-surface-variant" for="remember">Remember me</label>
+</div>
+<a class="font-caption text-caption text-tertiary-fixed hover:underline transition-all" href="#">Forgot Password?</a>
+</div>
+<!-- Primary Action -->
+<button class="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-md text-label-md py-sm rounded-full transition-all duration-200 active:scale-[0.98] shadow-lg shadow-primary/20 mt-sm" type="submit">
+                        Sign In
+                    </button>
+</form>
+<div class="mt-lg pt-lg border-t border-outline-variant flex flex-col items-center gap-base">
+<p class="font-body-md text-body-md text-on-surface-variant">Don't have an account?</p>
+<button class="w-full border-2 border-tertiary hover:bg-tertiary/10 text-tertiary font-label-md text-label-md py-sm rounded-full transition-all duration-200 flex items-center justify-center gap-sm">
+                        Create New Account
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Identity Footer -->
+<div class="mt-lg text-center">
+<p class="font-caption text-caption text-on-surface-variant/60">
+                    © 2024 foodForALL. Powered by Kindness &amp; Vitality.
+                </p>
+</div>
+</div>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        function switchRole(role) {
+            const indicator = document.getElementById('role-indicator');
+            const userBtn = document.getElementById('user-toggle');
+            const vendorBtn = document.getElementById('vendor-toggle');
+            
+            if (role === 'vendor') {
+                indicator.style.transform = 'translateX(100%)';
+                vendorBtn.classList.remove('text-on-surface-variant');
+                vendorBtn.classList.add('text-on-primary-container');
+                userBtn.classList.remove('text-on-primary-container');
+                userBtn.classList.add('text-on-surface-variant');
+            } else {
+                indicator.style.transform = 'translateX(0%)';
+                userBtn.classList.remove('text-on-surface-variant');
+                userBtn.classList.add('text-on-primary-container');
+                vendorBtn.classList.remove('text-on-primary-container');
+                vendorBtn.classList.add('text-on-surface-variant');
+            }
+        }
+
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.getElementById('visibility-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        // Form submission prevent default for demo
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = 'Authenticating...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70');
+            
+            setTimeout(() => {
+                btn.innerText = 'Success!';
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-70', 'bg-tertiary-container', 'text-on-tertiary-container');
+                    btn.classList.add('bg-primary');
+                }, 1500);
+            }, 1000);
+        });
+    </script>
+</body></html>

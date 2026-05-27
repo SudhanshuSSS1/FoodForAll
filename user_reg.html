@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Join foodForALL | Community Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #001206;
+            -webkit-font-smoothing: antialiased;
+        }
+        .vibrant-glow {
+            box-shadow: 0 0 20px rgba(110, 255, 132, 0.15);
+        }
+        .glass-panel {
+            background: rgba(0, 31, 14, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(37, 80, 54, 0.5);
+        }
+        .input-focus-glow:focus-within {
+            box-shadow: 0 0 15px rgba(110, 255, 132, 0.2);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface selection:bg-primary selection:text-on-primary">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#02e3fc",
+                        "on-primary-fixed": "#004a17",
+                        "on-primary-container": "#002d0b",
+                        "on-primary-fixed-variant": "#006b25",
+                        "surface-tint": "#6eff84",
+                        "background": "#001206",
+                        "surface-container-high": "#002612",
+                        "error-container": "#b92902",
+                        "on-secondary-container": "#e2ffe7",
+                        "primary-container": "#19bc4b",
+                        "surface": "#001206",
+                        "on-error-container": "#ffd2c8",
+                        "surface-dim": "#001206",
+                        "primary-dim": "#5ff077",
+                        "on-tertiary-container": "#004d57",
+                        "on-surface": "#ccfcd8",
+                        "tertiary": "#7fedff",
+                        "on-error": "#450900",
+                        "outline-variant": "#255036",
+                        "secondary-fixed-dim": "#71eca4",
+                        "on-surface-variant": "#88b695",
+                        "outline": "#537f61",
+                        "primary-fixed": "#6eff84",
+                        "surface-bright": "#00341b",
+                        "tertiary-fixed": "#02e3fc",
+                        "tertiary-fixed-dim": "#00d4ec",
+                        "surface-container": "#001f0e",
+                        "error-dim": "#d53d18",
+                        "inverse-on-surface": "#335e42",
+                        "secondary-fixed": "#80fab1",
+                        "on-tertiary-fixed": "#00383f",
+                        "on-tertiary": "#005761",
+                        "tertiary-dim": "#00d4ec",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary": "#005e36",
+                        "surface-variant": "#002d16",
+                        "on-secondary-fixed-variant": "#006a3d",
+                        "secondary": "#80fab1",
+                        "error": "#ff7351",
+                        "on-background": "#ccfcd8",
+                        "on-secondary-fixed": "#004a29",
+                        "primary-fixed-dim": "#5ff077",
+                        "inverse-primary": "#006f27",
+                        "surface-container-highest": "#002d16",
+                        "surface-container-low": "#001809",
+                        "on-tertiary-fixed-variant": "#005762",
+                        "secondary-dim": "#71eca4",
+                        "primary": "#6eff84",
+                        "inverse-surface": "#e9ffec",
+                        "secondary-container": "#006d3f",
+                        "on-primary": "#005f20"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "md": "24px",
+                        "container-max": "1280px",
+                        "xl": "80px",
+                        "lg": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "caption": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Quicksand"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<main class="min-h-screen flex items-center justify-center relative overflow-hidden px-gutter py-lg">
+<!-- Atmospheric Background Elements -->
+<div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="w-full max-w-container-max flex flex-col md:flex-row items-center gap-xl relative z-10">
+<!-- Left Side: Branding & Community Narrative -->
+<div class="flex-1 text-center md:text-left space-y-md">
+<div class="inline-flex items-center gap-sm mb-base">
+<img alt="foodForALL logo" class="h-12 w-12 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uh8hX3Gv_lUQqOQV9m1I9hRoM01DpdA6fkfTS_YrCyzqJl4YQSc2P4kw2-Z8Gu8iXiGl3m6GKKcccuKM6FX0DIC_tcR15hBHmVcw8rNK6yQkW9QOOlldlV4b4QZSqMfGTmrfLeJVh8EPqrKWkCiFJupoDw3GiS82C-6CfAxyQhUoYYvCRBZ5P8QPeWcyFgxA1N3lBJ39a30PWzIo4Y0vCVW_esROaL1OX4RsK_GvEatxrfjmja4c2DuQCs"/>
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">foodForALL</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight">
+                    Join the <span class="text-primary">Movement</span> of Food Abundance
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto md:mx-0">
+                    Your surplus can be someone's feast. Register today to bridge the gap between food waste and hunger in our community.
+                </p>
+<div class="pt-base flex flex-col sm:flex-row gap-md justify-center md:justify-start">
+<div class="flex items-center gap-base">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">volunteer_activism</span>
+</div>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface">12k+ Rescuers</p>
+<p class="font-caption text-caption text-on-surface-variant">Active monthly</p>
+</div>
+</div>
+<div class="flex items-center gap-base">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface">50k Meals</p>
+<p class="font-caption text-caption text-on-surface-variant">Shared this week</p>
+</div>
+</div>
+</div>
+<div class="hidden md:block w-full h-[300px] rounded-full overflow-hidden mt-lg border border-outline-variant/30">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="A diverse group of cheerful community volunteers and neighbors laughing together while sharing a vibrant meal outdoors at sunset. The scene is lit with warm golden hour light against a deep forest green background, conveying a high-energy, tech-forward movement of kindness and vitality. The style is professional and modern with high contrast." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBV3IGfTdete8eMG1UY4pPrkQtgFrEIamB-futrL4LdkCyeAz8gIiOBy4DRMqc9NqHWGyB5HffrH2e2HH3AiWJnM0_hYGVNQbkXF-cJGk8HgM6XhnR9s-ahgYXrXUPGxVjZKfYOfmvG69bnTFGVlrMm3wpdxxmdrI-jUvSdpM_aXkx1prtufHCQVMCN1RZe0vToK4j06L36BjLmkS4fEuGQLwDezRe19wBU0wwtOIkd61w_bUXBpfwUnmW8bOjlbA-puQ1JRbrJMswY')">
+</div>
+</div>
+</div>
+<!-- Right Side: Registration Form -->
+<div class="flex-1 w-full max-w-xl">
+<div class="glass-panel rounded-full p-md sm:p-lg shadow-xl relative overflow-hidden">
+<!-- Progress Bar (Subtle) -->
+<div class="absolute top-0 left-0 w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-primary transition-all duration-300 w-1/4" id="form-progress"></div>
+</div>
+<form class="space-y-md" id="registration-form">
+<div class="space-y-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Create your account</h2>
+<p class="font-caption text-caption text-on-surface-variant">Fill in your details to start rescuing surplus food.</p>
+</div>
+<!-- Grid Layout for inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Full Name -->
+<div class="flex flex-col gap-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="fullname">Full Name</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">person</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="fullname" name="fullname" placeholder="Jane Doe" required="" type="text"/>
+</div>
+</div>
+<!-- Date of Birth -->
+<div class="flex flex-col gap-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="dob">Date of Birth</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">calendar_today</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base [color-scheme:dark]" id="dob" name="dob" required="" type="date"/>
+</div>
+</div>
+<!-- Email ID -->
+<div class="flex flex-col gap-xs group md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="email">Email ID</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">mail</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="email" name="email" placeholder="jane@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Phone Number -->
+<div class="flex flex-col gap-xs group md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="phone">Phone Number</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">call</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="phone" name="phone" placeholder="+1 (555) 000-0000" required="" type="tel"/>
+</div>
+</div>
+<!-- Address -->
+<div class="flex flex-col gap-xs group md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="address">Address</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">location_on</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="address" name="address" placeholder="123 Kindness Way, Green City" required="" type="text"/>
+</div>
+</div>
+<!-- Create Password -->
+<div class="flex flex-col gap-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="password">Create Password</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">lock</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="flex flex-col gap-xs group">
+<label class="font-label-md text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" for="confirm_password">Confirm Password</label>
+<div class="relative flex items-center input-focus-glow rounded-lg bg-surface-container-low border border-outline-variant focus-within:border-primary transition-all">
+<span class="material-symbols-outlined absolute left-base text-on-surface-variant">verified_user</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface py-base pl-12 pr-base placeholder:text-outline" id="confirm_password" name="confirm_password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+</div>
+<!-- Terms -->
+<div class="flex items-start gap-sm pt-xs">
+<input class="mt-1 rounded-lg border-outline-variant bg-surface-container-low text-primary focus:ring-primary focus:ring-offset-background" id="terms" required="" type="checkbox"/>
+<label class="font-caption text-caption text-on-surface-variant" for="terms">
+                                I agree to the <a class="text-primary hover:underline transition-all" href="#">Terms of Service</a> and <a class="text-primary hover:underline transition-all" href="#">Privacy Policy</a>.
+                            </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-base rounded-full hover:bg-primary-fixed hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-base vibrant-glow group" type="submit">
+                            Complete Registration
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center font-label-md text-label-md text-on-surface-variant">
+                            Already have an account? <a class="text-tertiary hover:text-tertiary-fixed-dim transition-colors" href="#">Log In</a>
+</p>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center bg-background/90 backdrop-blur-md p-gutter" id="success-modal">
+<div class="glass-panel max-w-md w-full rounded-full p-lg text-center space-y-md animate-in fade-in zoom-in duration-300">
+<div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-md">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Welcome to foodForALL!</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Your account has been created successfully. You're now part of a movement making a real difference in the community.
+            </p>
+<button class="w-full bg-tertiary text-on-tertiary font-label-md text-label-md py-base rounded-full hover:brightness-110 transition-all" onclick="window.location.reload()">
+                Go to Dashboard
+            </button>
+</div>
+</div>
+<script>
+        // Simple Interaction Logic
+        const form = document.getElementById('registration-form');
+        const progressBar = document.getElementById('form-progress');
+        const inputs = form.querySelectorAll('input');
+        const successModal = document.getElementById('success-modal');
+
+        // Update progress bar based on filled inputs
+        const updateProgress = () => {
+            const totalInputs = inputs.length;
+            const filledInputs = Array.from(inputs).filter(input => {
+                if (input.type === 'checkbox') return input.checked;
+                return input.value.trim() !== '';
+            }).length;
+            const percentage = (filledInputs / totalInputs) * 100;
+            progressBar.style.width = `${percentage}%`;
+        };
+
+        inputs.forEach(input => {
+            input.addEventListener('input', updateProgress);
+            input.addEventListener('change', updateProgress);
+        });
+
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // check passwords
+            const pw = document.getElementById('password').value;
+            const cpw = document.getElementById('confirm_password').value;
+            
+            if(pw !== cpw) {
+                alert("Passwords do not match!");
+                return;
+            }
+
+            // Show success
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+        });
+
+        // Floating Micro-Animation for the BG
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const bubbles = document.querySelectorAll('.rounded-full.blur-[120px]');
+            bubbles.forEach((bubble, index) => {
+                const moveX = (x - 0.5) * (index === 0 ? 50 : -30);
+                const moveY = (y - 0.5) * (index === 0 ? 50 : -30);
+                bubble.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body></html>

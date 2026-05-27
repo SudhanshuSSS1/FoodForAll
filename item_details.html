@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>foodForALL | 6-Pack Fresh Bagels</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Quicksand:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#00180a", "on-primary-fixed-variant": "#006824", "on-primary-fixed": "#004816", "primary-fixed": "#6bfc81", "on-tertiary-fixed-variant": "#005762", "on-tertiary-container": "#004d57", surface: "#001206", "tertiary-container": "#00e3fc", "tertiary-fixed-dim": "#00d4ec", "surface-container-highest": "#002d17", "surface-variant": "#002d17", "on-error-container": "#ffd2c8", "on-secondary": "#005d35", primary: "#6bfc81", "surface-tint": "#6bfc81", "secondary-container": "#006d3f", "surface-container-high": "#002612", "primary-fixed-dim": "#5bed74", "on-primary": "#005d1f", "surface-bright": "#00341b", "on-surface": "#ccfcd9", "outline-variant": "#255036", error: "#ff7351", "surface-dim": "#001206", tertiary: "#7fedff", secondary: "#7df7ae", "on-secondary-container": "#e2ffe7", "on-primary-container": "#002a09", "on-error": "#450900", "secondary-fixed-dim": "#6ee9a1", "on-background": "#ccfcd9", "inverse-primary": "#006f27", outline: "#537f62", "on-surface-variant": "#88b695", "secondary-fixed": "#7df7ae", "tertiary-fixed": "#00e3fc", "primary-container": "#11b948", "on-secondary-fixed": "#004828", "surface-container": "#001f0e", "on-secondary-fixed-variant": "#00673c", "on-tertiary": "#005761", background: "#001206", "surface-container-lowest": "#000000", "inverse-on-surface": "#335e43", "error-container": "#b92902", "inverse-surface": "#e9ffec", "on-tertiary-fixed": "#00383f", "tertiary-dim": "#00d4ec", "error-dim": "#d53d18", "secondary-dim": "#6ee9a1", "primary-dim": "#5bed74"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {sm: "12px", xl: "80px", gutter: "24px", "container-max": "1280px", lg: "48px", base: "8px", xs: "4px", md: "24px"}, fontFamily: {caption: ["Inter"], "headline-md": ["Quicksand"], "label-md": ["Inter"], "headline-lg-mobile": ["Quicksand"], "body-lg": ["Inter"], "body-md": ["Inter"], "display-lg": ["Quicksand"], "headline-lg": ["Quicksand"], headline: ["Quicksand"], display: ["Quicksand"], body: ["Inter"], label: ["Inter"]}, fontSize: {caption: ["12px", {lineHeight: "16px", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "32px", fontWeight: "600"}], "label-md": ["14px", {lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "28px", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "700"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .blob-progress {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        .organic-shadow {
+            shadow-color: rgba(62, 123, 68, 0.08);
+        }
+        body {
+            background-color: #FDFBF7;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface-dim shadow-[0px_4px_20px_rgba(62,123,68,0.08)] sticky top-0 z-50 transition-all duration-300">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim" href="#">foodForALL</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Mission</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim font-bold" href="#">Find Food</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">List Surplus</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Log In</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:shadow-lg active:scale-95 transition-all">Get Started</button>
+</div>
+</div>
+</nav>
+<main class="max-w-container-max mx-auto px-gutter py-md md:py-lg">
+<!-- Breadcrumbs -->
+<nav class="mb-6 flex items-center gap-2 text-on-surface-variant font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Find Food</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Bakery</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">6-Pack Fresh Bagels</span>
+</nav>
+<!-- Main Product Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+<!-- Left: Image Gallery & Description -->
+<div class="lg:col-span-7 space-y-8">
+<div class="aspect-[4/3] w-full rounded-xl overflow-hidden bg-surface-container shadow-[0px_4px_20px_rgba(62,123,68,0.08)]">
+<img class="w-full h-full object-cover" data-alt="A warm, high-quality photograph of a rustic wooden table featuring a brown paper bag filled with six freshly baked, golden-brown sesame and poppy seed bagels. The lighting is soft morning sunlight creating a cozy, community-kitchen atmosphere with high-key whites and organic green accents in the background. The aesthetic is clean, modern, and inviting, emphasizing food freshness and dignity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSHMPUPAlqSUQ6yQ2xJxc_UQKd7WGdqZrc1kXDiMX0yY5KQFDI819S8Dvx34jas6QD10wrZBzbwOB4jLjtSrdKVH30Se7_fzhkkYgI84MKI35AiDnMr58-8TikQSuh4UhqiFYETe_w0FbTn92I0-Iua14wghV0pX0PUEtAVykPy0XZv7RZSwS-xsODIZ2fb9rAum7QKfPQDWf0tQdh1Z_BfxQ4Uau7EItoiZpzPlrBdjHNZ8Au88FbXJvzndfs1vA8Ug7tILbUt84H"/>
+</div>
+<div class="bg-surface-container-lowest p-md md:p-lg rounded-xl shadow-[0px_4px_20px_rgba(62,123,68,0.08)] space-y-6">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">6-Pack Fresh Bagels</h1>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">store</span>
+<span class="font-label-md text-label-md text-primary">Daily Crust Bakery</span>
+<span class="text-outline-variant mx-1">•</span>
+<span class="bg-tertiary-container/10 text-tertiary font-label-md text-label-md px-3 py-0.5 rounded-full">Bakery</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+                            These artisanal bagels are baked fresh every morning using locally sourced organic flour. They are boiled and stone-baked for the perfect chewy texture and golden crust.
+                        </p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border-l-4 border-secondary-container">
+<h3 class="font-label-md text-label-md text-on-secondary-fixed-variant flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[20px]">info</span>
+                            Why it's listed
+                        </h3>
+<p class="text-on-surface-variant font-body-md text-body-md">
+                            End of day surplus. These bagels were baked this morning and are perfectly fresh, but we clear our shelves every evening to make room for tomorrow's batch.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right: Claim Action & Details -->
+<aside class="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+<div class="bg-surface-container-lowest p-md md:p-lg rounded-xl shadow-[0px_12px_32px_rgba(0,0,0,0.05)] border border-white">
+<div class="mb-6 flex justify-between items-center">
+<div class="space-y-1">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</p>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+                                Available Now
+                            </div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Quantity</p>
+<p class="font-headline-md text-headline-md text-on-surface">1 Pack</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-start gap-4">
+<div class="bg-primary-container/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Pickup Window</p>
+<p class="text-on-surface-variant">Today, 6:00 PM - 8:00 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary-container/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Location</p>
+<p class="text-on-surface-variant">42nd Baker St, Community Plaza</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-full font-headline-md text-headline-md hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all duration-200" onclick="openModal()">
+                        Claim Item
+                    </button>
+<p class="text-center mt-4 font-caption text-caption text-on-surface-variant">
+                        By claiming, you agree to pick up within the designated window.
+                    </p>
+</div>
+<!-- Map Section -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(62,123,68,0.08)]">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<span class="font-label-md text-label-md">Store Location</span>
+<a class="text-primary font-label-md text-label-md hover:underline" href="#">Get Directions</a>
+</div>
+<div class="h-48 w-full bg-surface-container-high relative">
+<img class="w-full h-full object-cover grayscale-[20%]" data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLO8hiC_srJwCuX1pALuZypeJuTt94EmYYSkJ6XuJ8la0K16O-dpgASC1oJcuzKp01ZoGY8YKL371EeBCFz_n8_rfmRboJNHhYIZrxoOm0copTbOnYpaV7bLj21740MTfoGk98Byx0PDWGzKNvFS5_B4A6j5zCvDv3Ik7yaCxsaHnY--qA_eZ3R7hu3gfvrDtqGflowjJPjkGDWBQFi5SX1P-5TKlHT11GiuE9PxTi7giI2vqDVC4PcLUkILg0Y10sGW-Ul2DK9F12"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-primary text-on-primary p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined">storefront</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Related Items Section -->
+<section class="mt-16">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">More from Daily Crust</h2>
+<p class="text-on-surface-variant">Explore other available surplus items at this location.</p>
+</div>
+<button class="hidden md:flex items-center gap-2 text-primary font-label-md text-label-md hover:gap-3 transition-all">
+                    View Store <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Related Card 1 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(62,123,68,0.08)] hover:shadow-xl transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional close-up shot of two large, crusty sourdough loaves resting on a cooling rack in a warm, flour-dusted bakery. The lighting is soft and golden, accentuating the texture of the bread crust. The overall style is organic and high-end, fitting a community-first food donation platform with soft green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoqAtGDoLp8nF6P7_qBZlAdaQM59I9dtuqqVcobdd0Cw-Km0ALJAe9CsEnuCk1iQRosi4S1sWLEgVZqZajI9HomQtsmD0bJ0Ci1ZykeUE7jt-Id3vSA1R286yj25vZWRbGyaE-sKGhFhdU077h_l9oMX8-kC-9eAbmjrrZqYIho5XsMoJVxC6uJVetTFFCopBgx0Hu1VPFmzwBt7w2IeMNPyzSFZ_zPtketRldxZdlr9RbHaxMNRYHyciWHqVeWLTMB8-UvTiKq2_H"/>
+</div>
+<div class="p-md space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Artisan Sourdough</h3>
+<span class="text-primary font-bold">2 left</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-2">Large loaves baked with 24-hour fermented dough. Hearty and delicious.</p>
+<button class="w-full border-2 border-primary text-primary py-2 rounded-full font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">Details</button>
+</div>
+</div>
+<!-- Related Card 2 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(62,123,68,0.08)] hover:shadow-xl transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant, colorful selection of assorted morning pastries including croissants and muffins displayed on a white marble countertop. High-key lighting highlights the flaky layers and vibrant fruit toppings. The aesthetic is clean, modern, and high-quality, suggesting a friendly neighborhood cafe atmosphere with subtle green and orange brand colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoqpJKtE-3pp7oEbqQz8_xz5K0oggzFK4EhAJoSMpZZlr1sUoa1x1QgC0nCUMlXvt7pr4VsXZoMyKR2mfmh7kQ4ki1iDWh1Pc7ckckIHa47X8YUAfszrkP0-WlC8J5nEZtxOj41Mr6N9So5XcYcEHRwSPk-vRQebTGKRmNGmAy4U7gynmbEztl9FBkQK1hd0LnmUWV6wqq7ePwzNLHmDk3706GfXRwYzr_sCaH6LkkVmTCYCNF06JpSbNiegCQSrAd3f0Qpf8ohwQC"/>
+</div>
+<div class="p-md space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Pastry Box</h3>
+<span class="text-primary font-bold">1 left</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-2">Assorted morning pastries including croissants and danishes.</p>
+<button class="w-full border-2 border-primary text-primary py-2 rounded-full font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">Details</button>
+</div>
+</div>
+<!-- Related Card 3 -->
+<div class="group bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0px_4px_20px_rgba(62,123,68,0.08)] hover:shadow-xl transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A neatly packed brown box containing several bags of organic whole bean coffee. The setting is a clean, minimalist store shelf with warm lighting. The image emphasizes high-quality surplus goods in a community-driven environment, maintaining a soft, organic aesthetic with natural wood and green accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwyZ9WPVWWTOo2-fWHbw_cEw8mrLIUZgAVj6_OGZPnJu64wPg-PJfiyVJBPcbPsTBiWy8yADV0CKvTTxlIRMocdspVEYZY4XYQpCNBAFEK2fMd7iw9B4cBdl4-vXKLzL1tk_lzRJU_xc43_rnDSSQ4zmTZi7n4an0B-e0wPrBqXC0jAr7z8t10Ozvlv12MB3ciGchy9GD9nJpmWn3hDMFP63vkawtwigvHdS2m7n4C0CAny6I-CqsZ-R4BBlEf-8dKo52qdCExXmB0"/>
+</div>
+<div class="p-md space-y-3">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">Organic Coffee</h3>
+<span class="text-primary font-bold">5 left</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md line-clamp-2">250g bags of whole bean coffee, slightly past peak roast but excellent.</p>
+<button class="w-full border-2 border-primary text-primary py-2 rounded-full font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-colors">Details</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Success Modal Overlay -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-gutter" id="successModal">
+<div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" onclick="closeModal()"></div>
+<div class="relative bg-surface rounded-3xl p-md md:p-xl max-w-lg w-full text-center shadow-[0px_12px_32px_rgba(0,0,0,0.1)] scale-90 opacity-0 transition-all duration-300 transform" id="modalContent">
+<div class="w-20 h-20 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mx-auto mb-6 blob-progress">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Claimed Successfully!</h2>
+<p class="text-on-surface-variant mb-8 font-body-md text-body-md">
+                The bagels have been reserved for you. Please head to Daily Crust Bakery during the pickup window.
+            </p>
+<div class="bg-surface-container-low rounded-xl p-4 mb-8 text-left space-y-2">
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label-md">Claim ID:</span>
+<span class="font-bold">#FFA-29401</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-label-md">Pickup:</span>
+<span class="font-bold">6:00 PM - 8:00 PM</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary py-3 rounded-full font-label-md text-label-md" onclick="closeModal()">Go to My Claims</button>
+<button class="w-full text-primary font-label-md text-label-md py-2" onclick="closeModal()">Return Home</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter py-lg max-w-container-max mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">foodForALL</span>
+<p class="text-on-surface-variant font-body-md text-body-md">Reducing waste, feeding communities.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 md:gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">About Us</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Vendor Portal</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Impact Report</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md text-center md:text-right">
+                © 2024 foodForALL. All rights reserved.
+            </p>
+</div>
+</footer>
+<script>
+        function openModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-90', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            content.classList.add('scale-90', 'opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Simple parallax on image
+        window.addEventListener('scroll', () => {
+            const img = document.querySelector('img[data-alt*="bagels"]');
+            const speed = 0.05;
+            const rect = img.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                img.style.transform = `translateY(${(window.scrollY - rect.top) * speed}px)`;
+            }
+        });
+    </script>
+</body></html>

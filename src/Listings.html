@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(0, 31, 14, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(110, 255, 132, 0.1);
+        }
+        .vibrant-glow:hover {
+            box-shadow: 0 0 15px rgba(110, 255, 132, 0.3);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #001206;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #255036;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "primary-dim": "#5ff077",
+                "inverse-surface": "#e9ffec",
+                "surface-container-low": "#001809",
+                "surface": "#001206",
+                "outline": "#537f61",
+                "tertiary-fixed": "#02e3fc",
+                "on-primary": "#005f20",
+                "on-primary-fixed-variant": "#006b25",
+                "on-tertiary": "#005761",
+                "secondary-fixed-dim": "#71eca4",
+                "surface-container-lowest": "#000000",
+                "tertiary-fixed-dim": "#00d4ec",
+                "outline-variant": "#255036",
+                "on-surface": "#ccfcd8",
+                "surface-variant": "#002d16",
+                "on-tertiary-fixed": "#00383f",
+                "surface-container-high": "#002612",
+                "primary": "#6eff84",
+                "on-error-container": "#ffd2c8",
+                "surface-tint": "#6eff84",
+                "tertiary-container": "#02e3fc",
+                "error-dim": "#d53d18",
+                "on-secondary": "#005e36",
+                "inverse-primary": "#006f27",
+                "on-tertiary-fixed-variant": "#005762",
+                "on-background": "#ccfcd8",
+                "on-error": "#450900",
+                "surface-container": "#001f0e",
+                "error-container": "#b92902",
+                "error": "#ff7351",
+                "tertiary-dim": "#00d4ec",
+                "on-primary-fixed": "#004a17",
+                "inverse-on-surface": "#335e42",
+                "surface-bright": "#00341b",
+                "secondary-dim": "#71eca4",
+                "primary-container": "#19bc4b",
+                "background": "#001206",
+                "tertiary": "#7fedff",
+                "primary-fixed-dim": "#5ff077",
+                "secondary-fixed": "#80fab1",
+                "surface-dim": "#001206",
+                "on-secondary-container": "#e2ffe7",
+                "surface-container-highest": "#002d16",
+                "primary-fixed": "#6eff84",
+                "on-surface-variant": "#88b695",
+                "secondary-container": "#006d3f",
+                "on-tertiary-container": "#004d57",
+                "secondary": "#80fab1",
+                "on-secondary-fixed": "#004a29",
+                "on-secondary-fixed-variant": "#006a3d",
+                "on-primary-container": "#002d0b"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "container-max": "1280px",
+                "xl": "80px",
+                "sm": "12px",
+                "base": "8px",
+                "xs": "4px",
+                "md": "24px",
+                "lg": "48px",
+                "gutter": "24px"
+              },
+              "fontFamily": {
+                "caption": ["Inter"],
+                "headline-lg-mobile": ["Quicksand"],
+                "body-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "display-lg": ["Quicksand"],
+                "headline-md": ["Quicksand"],
+                "headline-lg": ["Quicksand"],
+                "body-md": ["Inter"]
+              },
+              "fontSize": {
+                "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="hidden md:flex flex-col h-full p-md space-y-base bg-surface-container dark:bg-surface-container-low h-screen w-64 fixed left-0 top-0 shadow-md">
+<div class="mb-lg px-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">foodForALL</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Vendor Portal</p>
+</div>
+<div class="flex items-center space-x-sm px-xs pb-md mb-base border-b border-outline-variant">
+<img alt="Green Grocers Avatar" class="w-10 h-10 rounded-full border border-primary-dim object-cover" data-alt="A portrait-style close-up of a friendly, smiling food market vendor in a modern organic grocery store environment. The lighting is warm and cinematic, highlighting fresh produce in the background with a soft bokeh effect. The overall aesthetic is vibrant and professional, emphasizing kindness and local community connection with lush green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuZgVGNdUOpvespYVbJEFGWYb9c7zERgI7GZbyW9kE_B6VkPuXvNIKlAgsAJJ4FOPhp1pxuni8CDKrs61z5VQXaXuE1xDqd85Pr3fdO4jrh0z3fp1dMi_fHXpJBjjM_llQh0TyfodJ8qrrQ6AxnFr-cAlYInyyLO1n_Ni7tEth_ho4rMPeQnh7BaMct5EERie7p3cCJyBpESgCgSBLTz-Vm-Z8nJ3GGXf4YSgd6fcdcxwRtxW0bHrJXbtrb-5o1j4mAlp7hJg0BD3z"/>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">Green Grocers</p>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant">Verified Vendor</p>
+</div>
+</div>
+<nav class="flex-grow space-y-xs">
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<!-- Active State: Listings -->
+<a class="flex items-center gap-sm px-sm py-base bg-primary-container text-on-primary-container dark:bg-primary-fixed dark:text-on-primary-fixed rounded-xl transition-all scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fastfood</span>
+<span class="font-label-md text-label-md">Listings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-base text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+</nav>
+<button class="w-full bg-primary text-on-primary-fixed font-bold py-sm rounded-full flex items-center justify-center gap-xs hover:scale-[1.02] active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+            Post New Item
+        </button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 p-gutter max-w-container-max mx-auto min-h-screen">
+<!-- Header Section -->
+<header class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary-fixed">Manage Listings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mt-xs">
+                    Overview of your surplus food contributions. Keep your inventory fresh to ensure timely rescue and maximize community impact.
+                </p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="bg-surface-container p-xs rounded-full flex gap-xs">
+<button class="bg-primary text-on-primary font-label-md px-md py-xs rounded-full shadow-sm transition-all">Listings</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-md px-md py-xs rounded-full transition-all">History</button>
+</div>
+</div>
+</header>
+<!-- Stats Overview Bento (Briefly) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-lg">
+<div class="glass-panel p-md rounded-full border-l-4 border-primary">
+<p class="font-label-md text-on-surface-variant">Active Rescues</p>
+<p class="font-headline-md text-primary mt-xs">12 Items</p>
+</div>
+<div class="glass-panel p-md rounded-full border-l-4 border-tertiary">
+<p class="font-label-md text-on-surface-variant">Claimed Today</p>
+<p class="font-headline-md text-tertiary mt-xs">240kg</p>
+</div>
+<div class="glass-panel p-md rounded-full border-l-4 border-secondary">
+<p class="font-label-md text-on-surface-variant">Est. Impact</p>
+<p class="font-headline-md text-secondary mt-xs">$1,240</p>
+</div>
+<div class="glass-panel p-md rounded-full border-l-4 border-error">
+<p class="font-label-md text-on-surface-variant">Expiring Soon</p>
+<p class="font-headline-md text-error mt-xs">3 Items</p>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex border-b border-outline-variant mb-md overflow-x-auto whitespace-nowrap scrollbar-hide">
+<button class="px-md py-base font-label-md text-primary border-b-2 border-primary active:scale-95 transition-all">Active (12)</button>
+<button class="px-md py-base font-label-md text-on-surface-variant hover:text-on-surface transition-all">Scheduled (4)</button>
+<button class="px-md py-base font-label-md text-on-surface-variant hover:text-on-surface transition-all">Expired (8)</button>
+<button class="px-md py-base font-label-md text-on-surface-variant hover:text-on-surface transition-all">Claimed (45)</button>
+</div>
+<!-- Listings Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Listing Card 1: Urgent -->
+<div class="glass-panel rounded-full overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Organic Sourdough" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A high-resolution photograph of several artisanal sourdough bread loaves on a rustic wooden shelf. The lighting is dramatic and warm, emphasizing the crust's texture and golden-brown color. The environment is a modern, high-end bakery. The color palette is rich with earth tones and deep forest greens, creating a sense of abundance and quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSf6XfzFwpBbKYZe94aF6JzJUVBRy8hKsZxS7_00s9MOzfpk1veJVVWrY7-RZmY7uwa3Dse-YH0R4ZuiCuYBcVLs7Pu_eAMSkSD_WM-2vyozQltw3Z9S4gJ-WxblkioL1g-M0zIsnkmkoYBp3GxCknTjqhe7sIiBmFF-FG9vPvvr6vQJgapPwV_jgADoLHQ6e3MCb4yXuZF1hbM1lOKvKdduYAA-nff0YcO6OQh6OSft92euf_hsIQnjEy3Qmh_aNUqnAo43p2nRM_"/>
+<div class="absolute top-sm right-sm bg-error text-on-error px-sm py-xs rounded-full font-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                        Expiring: 42m
+                    </div>
+<div class="absolute bottom-sm left-sm bg-primary/90 text-on-primary-fixed px-sm py-xs rounded-full font-label-md backdrop-blur-md">
+                        Bakery
+                    </div>
+</div>
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-primary-fixed">Organic Sourdough</h3>
+<span class="text-tertiary-fixed font-bold font-headline-md">Free</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-md mb-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+                            15 Loaves
+                        </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                            0.2 miles
+                        </div>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-surface-variant text-on-surface py-sm rounded-full font-label-md hover:bg-outline-variant transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                            Edit
+                        </button>
+<button class="flex-1 bg-error-container text-on-error-container py-sm rounded-full font-label-md hover:opacity-80 transition-opacity flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                            Close
+                        </button>
+</div>
+</div>
+</div>
+<!-- Listing Card 2: Normal -->
+<div class="glass-panel rounded-full overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
+<div class="relative h-48 overflow-hidden">
+<img alt="Assorted Tropical Fruits" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A vibrant and colorful overhead shot of sliced tropical fruits including dragonfruit, mango, and papaya arranged artfully on a dark stone platter. The lighting is crisp and bright, making the natural colors pop against the dark background. The scene exudes vitality and freshness, aligned with a modern, high-energy food rescue brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcJs9Ccx6OwU47NMgVoSXnH50LpkoDPV0KjYgyCV86UaXeqNBGpuF9NfnMCcbD2LzDXyb3cCNvyKG6G5IRIj6liC1g4QljtU8PRnLz6W-JkgONfJPgp2cWIZZIFjbna096Cph6XvHLiROCEy9VJzydodAS3Vw3Q58tb0k1LDIyZ7CBnC95hroIRtJ1M2EoekH6j8q5EeBsq12Bi11YFO0XOE56toouDtZC1o0-32poU7pMfEfd_HDM_XVSdvtZfFdV2CLfKLtdN2OB"/>
+<div class="absolute top-sm right-sm bg-surface-container-high text-on-surface-variant px-sm py-xs rounded-full font-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                        Expiring: 4h 15m
+                    </div>
+<div class="absolute bottom-sm left-sm bg-primary/90 text-on-primary-fixed px-sm py-xs rounded-full font-label-md backdrop-blur-md">
+                        Produce
+                    </div>
+</div>
+<div class="p-md flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-primary-fixed">Tropical Fruit Box</h3>
+<span class="text-on-surface font-bold font-headline-md">$2.50</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-md mb-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+                            4 Units
+                        </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">scale</span>
+                            ~8kg Total
+                        </div>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 bg-surface-variant text-on-surface py-sm rounded-full font-label-md hover:bg-outline-variant transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                            Edit
+                        </button>
+<button class="flex-1 bg-error-container text-on-error-container py-sm rounded-full font-label-md hover:opacity-80 transition-opacity flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                            Close
+                        </button>
+</div>
+</div>
+</div>
+<!-- Listing Card 3: New Listing CTA (Glassmorphism Bento Variation) -->
+<button class="border-2 border-dashed border-outline-variant rounded-full flex flex-col items-center justify-center p-xl hover:border-primary/60 hover:bg-surface-container-low transition-all group">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-[48px]">add_circle</span>
+</div>
+<h3 class="font-headline-md text-on-surface">Create New Listing</h3>
+<p class="font-body-md text-on-surface-variant text-center max-w-[200px] mt-xs">
+                    Quickly add surplus food to the rescue network.
+                </p>
+</button>
+<!-- Listing Card 4: Detailed Info Layout -->
+<div class="glass-panel rounded-full overflow-hidden flex flex-col hover:border-primary/40 transition-all group col-span-1 lg:col-span-2">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+<img alt="Salad Bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A top-down view of multiple gourmet pre-packaged salad bowls, featuring vibrant greens, colorful vegetables, and various proteins. The packaging is clean and eco-friendly. Lighting is bright and even, highlighting the freshness of the ingredients. The aesthetic is tech-forward, modern, and high-energy, suggesting health and vitality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA66Y3VggwjAcfXFeI0qErz_DzIjLnmy_CgoxVty5HSvPV4vzopoLaxkJkxpCfbks9wweqgupXKZ2TSPKmFWb7YTqfkGoW1_YGBpb5SXfYY983KIqQb51vnOS2CkOBMd4yh_YAhufOIhccQ8M5v-GFCcqhGhxLCHrMaoCC3JWe9jEuNBFE8Hpg_pPaK43cjeA_s9gMZUG1kwaBRJKyGeFixt72hsRz9ORy2j6U6NfT-hvyYYGz9a9yqC8V0o-XXt3znTaPAB_OPR0xR"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent md:hidden"></div>
+</div>
+<div class="md:w-1/2 p-lg flex flex-col justify-center">
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-tertiary-container text-on-tertiary-container px-sm py-[2px] rounded-full font-label-md text-xs">RESCUE READY</span>
+<span class="text-on-surface-variant font-label-md">• Ready in 15m</span>
+</div>
+<h3 class="font-headline-md text-primary-fixed mb-sm">Premium Salad Bowls</h3>
+<p class="font-body-md text-on-surface-variant mb-md">
+                            Assorted daily salads including Caesar, Mediterranean, and Quinoa bowls. Perfectly fresh, packaged for easy transport.
+                        </p>
+<div class="grid grid-cols-2 gap-md mb-lg">
+<div>
+<p class="font-label-md text-on-surface-variant uppercase text-[10px] tracking-widest">Quantity</p>
+<p class="font-headline-md text-on-surface">8 Bowls</p>
+</div>
+<div>
+<p class="font-label-md text-on-surface-variant uppercase text-[10px] tracking-widest">Price</p>
+<p class="font-headline-md text-tertiary-fixed">Free</p>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="bg-primary text-on-primary font-bold px-lg py-sm rounded-full flex items-center justify-center gap-sm hover:vibrant-glow transition-all">
+<span class="material-symbols-outlined">edit</span>
+                                Quick Edit
+                            </button>
+<button class="p-sm rounded-full border border-outline-variant text-on-surface-variant hover:text-error hover:border-error transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Card 5: Expiring Soon Small Card -->
+<div class="glass-panel rounded-full p-md flex flex-col justify-between border-l-8 border-error">
+<div>
+<div class="flex justify-between items-start mb-md">
+<div class="bg-error/10 text-error p-sm rounded-xl">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-error font-bold font-headline-md text-sm">EXPIRING</span>
+</div>
+<h3 class="font-headline-md text-on-surface">Daily Pastry Mix</h3>
+<p class="text-on-surface-variant font-label-md">Expiring in 18 minutes. Boost listing?</p>
+</div>
+<div class="mt-lg">
+<button class="w-full bg-error-container text-on-error-container py-base rounded-full font-bold hover:bg-error-container/80 transition-colors">
+                        Close Listing Now
+                    </button>
+</div>
+</div>
+</div>
+<!-- Footer Shell Anchor -->
+<footer class="mt-xl border-t border-outline-variant pt-lg pb-md flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start">
+<h4 class="font-headline-md text-primary font-bold">foodForALL</h4>
+<p class="font-body-md text-on-surface-variant text-sm mt-xs">© 2024 foodForALL. All rights reserved.</p>
+</div>
+<div class="flex gap-lg">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Vendor Portal</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Impact Report</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+</footer>
+</main>
+<!-- Mobile Bottom NavBar Anchor -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container p-sm flex justify-around items-center border-t border-outline-variant z-50">
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-label-md">Inventory</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fastfood</span>
+<span class="text-[10px] font-label-md">Listings</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-[10px] font-label-md">Messages</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-label-md">Profile</span>
+</a>
+</nav>
+<!-- FAB (Suppressed on Details/Settings, shown here as it is primary task area) -->
+<button class="md:hidden fixed bottom-24 right-sm bg-primary text-on-primary-fixed w-14 h-14 rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<script>
+        // Micro-interactions for listed items
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Tab switching logic (Visual only)
+        const tabs = document.querySelectorAll('button[class*="px-md py-base"]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => {
+                    t.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                    t.classList.add('text-on-surface-variant');
+                });
+                tab.classList.add('text-primary', 'border-b-2', 'border-primary');
+                tab.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

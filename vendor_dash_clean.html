@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Dashboard | foodForALL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fbf9f5;
+            color: #1b1c1a;
+        }
+        .organic-shadow {
+            box-shadow: 0px 4px 20px rgba(62, 123, 68, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e4e2de;
+            border-radius: 10px;
+        }
+    </style>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"surface-container-low": "#00180a", "on-primary-fixed-variant": "#006824", "on-primary-fixed": "#004816", "primary-fixed": "#6bfc81", "on-tertiary-fixed-variant": "#005762", "on-tertiary-container": "#004d57", surface: "#001206", "tertiary-container": "#00e3fc", "tertiary-fixed-dim": "#00d4ec", "surface-container-highest": "#002d17", "surface-variant": "#002d17", "on-error-container": "#ffd2c8", "on-secondary": "#005d35", primary: "#6bfc81", "surface-tint": "#6bfc81", "secondary-container": "#006d3f", "surface-container-high": "#002612", "primary-fixed-dim": "#5bed74", "on-primary": "#005d1f", "surface-bright": "#00341b", "on-surface": "#ccfcd9", "outline-variant": "#255036", error: "#ff7351", "surface-dim": "#001206", tertiary: "#7fedff", secondary: "#7df7ae", "on-secondary-container": "#e2ffe7", "on-primary-container": "#002a09", "on-error": "#450900", "secondary-fixed-dim": "#6ee9a1", "on-background": "#ccfcd9", "inverse-primary": "#006f27", outline: "#537f62", "on-surface-variant": "#88b695", "secondary-fixed": "#7df7ae", "tertiary-fixed": "#00e3fc", "primary-container": "#11b948", "on-secondary-fixed": "#004828", "surface-container": "#001f0e", "on-secondary-fixed-variant": "#00673c", "on-tertiary": "#005761", background: "#001206", "surface-container-lowest": "#000000", "inverse-on-surface": "#335e43", "error-container": "#b92902", "inverse-surface": "#e9ffec", "on-tertiary-fixed": "#00383f", "tertiary-dim": "#00d4ec", "error-dim": "#d53d18", "secondary-dim": "#6ee9a1", "primary-dim": "#5bed74"}, borderRadius: {DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem"}, spacing: {sm: "12px", xl: "80px", gutter: "24px", "container-max": "1280px", lg: "48px", base: "8px", xs: "4px", md: "24px"}, fontFamily: {caption: ["Inter"], "headline-md": ["Quicksand"], "label-md": ["Inter"], "headline-lg-mobile": ["Quicksand"], "body-lg": ["Inter"], "body-md": ["Inter"], "display-lg": ["Quicksand"], "headline-lg": ["Quicksand"], headline: ["Quicksand"], display: ["Quicksand"], body: ["Inter"], label: ["Inter"]}, fontSize: {caption: ["12px", {lineHeight: "16px", fontWeight: "500"}], "headline-md": ["24px", {lineHeight: "32px", fontWeight: "600"}], "label-md": ["14px", {lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "28px", fontWeight: "400"}], "body-md": ["16px", {lineHeight: "24px", fontWeight: "400"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "700"}]}}}};</script>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface shadow-[0px_4px_20px_rgba(62,123,68,0.08)]">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">foodForALL</span>
+<nav class="hidden md:flex space-x-base ml-lg">
+<a class="font-label-md text-label-md text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Mission</a>
+<a class="font-label-md text-label-md text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Find Food</a>
+<a class="font-label-md text-label-md text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">List Surplus</a>
+</nav>
+</div>
+<div class="flex items-center space-x-sm">
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center space-x-2">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md w-32 md:w-64" placeholder="Search..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md hover:scale-95 transition-transform">Get Started</button>
+</div>
+</div>
+</header>
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-16 bg-surface-container flex flex-col p-md space-y-base shadow-md hidden lg:flex">
+<div class="flex items-center space-x-sm mb-lg">
+<div class="w-12 h-12 rounded-full bg-primary-fixed overflow-hidden">
+<img alt="Vendor Profile" class="w-full h-full object-cover" data-alt="A warm, professional portrait of a friendly market owner in their local grocery store, wearing a green apron. The lighting is soft and natural, emphasizing a bright, community-focused atmosphere with fresh produce in the soft-focus background. The overall aesthetic is vibrant and kind, following a clean, light-mode palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvRUtZObzwKPYvw55WhNhxw2UDBA945JbCQYNw0T6b5dITJXhWUEf2J_9zwPBe9Hz0ZTAJONiEvJU7aRDHECNcwkabHWz0PzkXTChKrr9O9k2WTh5ovjnB_44mhSkk07LIUWbd46FlCRx1h82q61LO1_26E1u8gzQBRvIYzRaoVHZ7VSzgsx1gAd-Y-Cb8IAfIJ5IfoTTxLh0o5QuEnN7SvcXGnEUSrU3pNHE6N7-HOwpZsG7fm5n-cw3pJb4kjsNaF3-EZBdJ85_J"/>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] font-bold text-primary">Green Grocers</h3>
+<p class="font-label-md text-[12px] text-on-surface-variant">Verified Vendor</p>
+</div>
+</div>
+<nav class="flex-grow space-y-xs">
+<a class="flex items-center space-x-sm p-sm bg-primary-container text-on-primary-container rounded-xl transition-all scale-[0.98]" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center space-x-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">fastfood</span>
+<span class="font-label-md text-label-md">Listings</span>
+</a>
+<a class="flex items-center space-x-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center space-x-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+</nav>
+<button class="mt-auto w-full bg-secondary-container text-on-secondary-container py-3 rounded-xl font-label-md text-label-md flex items-center justify-center space-x-xs hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Post New Item</span>
+</button>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow lg:ml-64 p-gutter lg:p-lg min-h-screen">
+<div class="max-w-[1000px] mx-auto space-y-md">
+<!-- Welcome Section -->
+<header>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Vendor Dashboard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Good morning, Green Grocers. Let's make sure no good food goes to waste today.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Quick List Form (Bento Style) -->
+<section class="md:col-span-5 bg-surface-container-lowest rounded-xl organic-shadow p-md">
+<div class="flex items-center space-x-2 mb-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Quick List Surplus</h2>
+</div>
+<form class="space-y-base" onsubmit="event.preventDefault();">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Item Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body-md" placeholder="e.g., Organic Bananas (Bunch)" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-base">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Quantity</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body-md" placeholder="5kg / 3 units" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Expiry Time</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body-md" type="time"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface-variant">Pricing</label>
+<div class="flex space-x-base">
+<button class="flex-1 py-3 px-4 border-2 border-primary rounded-lg font-label-md text-primary flex items-center justify-center space-x-base bg-primary-container/10" type="button">
+<span class="material-symbols-outlined text-[18px]">volunteer_activism</span>
+<span>Free</span>
+</button>
+<button class="flex-1 py-3 px-4 border-2 border-transparent bg-surface-container-low rounded-lg font-label-md text-on-surface-variant flex items-center justify-center space-x-base" type="button">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span>Low Cost</span>
+</button>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md flex items-center justify-center space-x-sm mt-md hover:scale-[0.98] transition-transform">
+<span>Publish Surplus</span>
+<span class="material-symbols-outlined">rocket_launch</span>
+</button>
+</form>
+</section>
+<!-- Impact Visualization (Organic Shape) -->
+<section class="md:col-span-7 bg-primary-container text-on-primary-container rounded-xl p-md relative overflow-hidden flex flex-col justify-between">
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md font-bold mb-xs">Today's Impact</h2>
+<p class="font-body-md opacity-90 max-w-[280px]">You have rescued 42 meals for your local community today.</p>
+</div>
+<div class="relative h-32 mt-md">
+<!-- Circular Progress Visual -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-40 h-40 bg-on-primary-container/20 rounded-full blur-2xl animate-pulse"></div>
+<div class="relative z-10 text-center">
+<span class="block font-display-lg text-[48px] leading-none">84%</span>
+<span class="font-label-md uppercase tracking-wider opacity-80">Daily Goal</span>
+</div>
+</div>
+<!-- Blob Decoration -->
+<div class="absolute -right-8 -bottom-8 w-48 h-48 bg-secondary-container/30 rounded-full blur-3xl"></div>
+</div>
+<div class="mt-md flex justify-between items-end relative z-10">
+<div class="flex space-x-sm">
+<div class="bg-on-primary-container/20 p-sm rounded-lg backdrop-blur-md">
+<p class="font-label-md text-[12px] opacity-70">CO2 Saved</p>
+<p class="font-headline-md text-[20px]">12.4kg</p>
+</div>
+<div class="bg-on-primary-container/20 p-sm rounded-lg backdrop-blur-md">
+<p class="font-label-md text-[12px] opacity-70">Lives Touched</p>
+<p class="font-headline-md text-[20px]">18</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[48px] opacity-20">compost</span>
+</div>
+</section>
+</div>
+<!-- Active Listings Table -->
+<section class="bg-surface-container-lowest rounded-xl organic-shadow overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-surface-variant">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary">list_alt</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Active Listings</h2>
+</div>
+<div class="flex space-x-base">
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="text-primary font-label-md text-label-md">View All</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-md py-4 font-label-md text-label-md text-on-surface-variant">Item Detail</th>
+<th class="px-md py-4 font-label-md text-label-md text-on-surface-variant">Quantity</th>
+<th class="px-md py-4 font-label-md text-label-md text-on-surface-variant">Expires In</th>
+<th class="px-md py-4 font-label-md text-label-md text-on-surface-variant">Status</th>
+<th class="px-md py-4 font-label-md text-label-md text-on-surface-variant text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center space-x-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Fresh Greens" class="w-full h-full object-cover" data-alt="Close-up photography of vibrant, fresh organic kale and spinach leaves in a rustic wooden crate. The lighting is bright and clear, showcasing the rich greens and healthy textures. The mood is fresh and wholesome, fitting the community-led food sustainability theme with a clean light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqv9w21iobp7ZMuztv-7OstJ2KMZ3q1wu_c1B4GX1ofUW3kp57T7bRPCNa8T0cINgTuQZdXiOTloiUBdhfQeYoZwaTcdWpYIp-JUkENxiTwlDr_PPChYo74jkAawZosGy6kmCaSnqnJck_3jdq5dxOnws7nTEloSsnxcOlBMn8uTXRUwp1rNiqc1T1oS0-sv-KtffZkI4ErJFbC8w7r4Qtic8BT_rwcVeNYnINqFHmQGM5lfzOKoayoYbrVK9Wl7HzRvtyXDvicWXw"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Fresh Kale Mix</p>
+<p class="font-caption text-on-surface-variant">Listed 2h ago</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 font-body-md text-on-surface">12 Bags</td>
+<td class="px-md py-4 font-body-md text-on-surface">45m</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center space-x-1 px-3 py-1 bg-primary-container/20 text-primary-container font-label-md text-[12px] rounded-full">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span>Available</span>
+</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center space-x-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Orange Slices" class="w-full h-full object-cover" data-alt="Top-down shot of sliced citrus fruits including oranges and grapefruits on a white marble surface. The colors are bright and sun-drenched, creating a feeling of vitality and warmth. The style is modern and minimalist with generous white space around the colorful subject, aligning with the foodForALL brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBZyHDEoIIrJzDoGKKDhK0AyACdU_cy6A9nrHN1RBuZvreOJ3HH7TRTvlpg7FmF_zrpI-HjexXsYYUeajiepDRUlDl9CFZBLwSm-bexuMtv1-QmIvNhWX7G5dz9M2tVJAMV5RLA49AfnPx4GUSQnQjLyqPRxy-XVljJ44eysX_NCwqvhxBT-kYvf2ifEgKK5EIgX2WdduZHJZzYSRreHue0B72jMtZusGHgTeqMpbNFdT75Z5U24UJkkSOFG3zVpvpB30mS0bvr40n"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Sunkist Oranges</p>
+<p class="font-caption text-on-surface-variant">Listed 4h ago</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 font-body-md text-on-surface">4 Boxes</td>
+<td class="px-md py-4 font-body-md text-on-surface">Expired</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center space-x-1 px-3 py-1 bg-secondary-container/20 text-on-secondary-container font-label-md text-[12px] rounded-full">
+<span>Claimed</span>
+</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-md py-4">
+<div class="flex items-center space-x-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container overflow-hidden">
+<img alt="Sourdough Bread" class="w-full h-full object-cover" data-alt="A warm, artisanal loaf of sourdough bread with a golden-brown crust, resting on a white linen napkin. The lighting is soft and golden, evocative of a neighborhood kitchen early in the morning. The mood is cozy and welcoming, emphasizing dignity and high-quality food surplus in a clean, light-mode layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRTuOn3AjmH2T1y2WkZjzwYeWCQKj-w7E2VcZBtiIImzqAnLZWIq5qa6fQxswa0SPDZMDaRxsRfx5nbM0js8Lq67MxUHaZzJunQpgz-PyUiyMo0bNFXEaNi3aYoIpZdj6Vuyv6ICofP_wDNBc67hpHC9yosHpQ5ut2UyEkJG20Au9ygjcS6l93rpse4TGAEMu6ml7mkEMRLuQtFe08LJjzVsW_JFS-h7DqS2PyjnJ3qbYS7BabwC7SlEL0Bwx8syn0EXC7XWIIHQQb"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Daily Sourdough</p>
+<p class="font-caption text-on-surface-variant">Listed 15m ago</p>
+</div>
+</div>
+</td>
+<td class="px-md py-4 font-body-md text-on-surface">8 Loaves</td>
+<td class="px-md py-4 font-body-md text-on-surface">6h</td>
+<td class="px-md py-4">
+<span class="inline-flex items-center space-x-1 px-3 py-1 bg-primary-container/20 text-primary-container font-label-md text-[12px] rounded-full">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span>Available</span>
+</span>
+</td>
+<td class="px-md py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full relative z-40">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter py-lg max-w-container-max mx-auto space-y-md md:space-y-0">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-primary">foodForALL</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">© 2024 foodForALL. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Vendor Portal</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Impact Report</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface shadow-[0px_-4px_20px_rgba(62,123,68,0.08)] px-md py-2 flex justify-around items-center z-50">
+<button class="flex flex-col items-center p-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-label-md">Home</span>
+</button>
+<button class="flex flex-col items-center p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-[10px] font-label-md">Inventory</span>
+</button>
+<button class="flex flex-col items-center -mt-8 bg-secondary-container text-on-secondary-container p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<button class="flex flex-col items-center p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="text-[10px] font-label-md">Analytics</span>
+</button>
+<button class="flex flex-col items-center p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-[10px] font-label-md">Mail</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction: Button scale effect and form field focus highlight
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+            btn.addEventListener('mouseleave', () => btn.classList.remove('scale-95'));
+        });
+
+        // Mock interaction for pricing toggle
+        const pricingBtns = document.querySelectorAll('button[type="button"]');
+        pricingBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                pricingBtns.forEach(b => {
+                    b.classList.remove('border-primary', 'bg-primary-container/10', 'text-primary');
+                    b.classList.add('border-transparent', 'bg-surface-container-low', 'text-on-surface-variant');
+                });
+                btn.classList.add('border-primary', 'bg-primary-container/10', 'text-primary');
+                btn.classList.remove('border-transparent', 'bg-surface-container-low', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

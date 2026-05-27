@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #001206;
+            color: #ccfcd8;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(0, 45, 22, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(110, 255, 132, 0.1);
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(110, 255, 132, 0.1) 0%, rgba(110, 255, 132, 0) 100%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-dim": "#5ff077",
+                        "inverse-surface": "#e9ffec",
+                        "surface-container-low": "#001809",
+                        "surface": "#001206",
+                        "outline": "#537f61",
+                        "tertiary-fixed": "#02e3fc",
+                        "on-primary": "#005f20",
+                        "on-primary-fixed-variant": "#006b25",
+                        "on-tertiary": "#005761",
+                        "secondary-fixed-dim": "#71eca4",
+                        "surface-container-lowest": "#000000",
+                        "tertiary-fixed-dim": "#00d4ec",
+                        "outline-variant": "#255036",
+                        "on-surface": "#ccfcd8",
+                        "surface-variant": "#002d16",
+                        "on-tertiary-fixed": "#00383f",
+                        "surface-container-high": "#002612",
+                        "primary": "#6eff84",
+                        "on-error-container": "#ffd2c8",
+                        "surface-tint": "#6eff84",
+                        "tertiary-container": "#02e3fc",
+                        "error-dim": "#d53d18",
+                        "on-secondary": "#005e36",
+                        "inverse-primary": "#006f27",
+                        "on-tertiary-fixed-variant": "#005762",
+                        "on-background": "#ccfcd8",
+                        "on-error": "#450900",
+                        "surface-container": "#001f0e",
+                        "error-container": "#b92902",
+                        "error": "#ff7351",
+                        "tertiary-dim": "#00d4ec",
+                        "on-primary-fixed": "#004a17",
+                        "inverse-on-surface": "#335e42",
+                        "surface-bright": "#00341b",
+                        "secondary-dim": "#71eca4",
+                        "primary-container": "#19bc4b",
+                        "background": "#001206",
+                        "tertiary": "#7fedff",
+                        "primary-fixed-dim": "#5ff077",
+                        "secondary-fixed": "#80fab1",
+                        "surface-dim": "#001206",
+                        "on-secondary-container": "#e2ffe7",
+                        "surface-container-highest": "#002d16",
+                        "primary-fixed": "#6eff84",
+                        "on-surface-variant": "#88b695",
+                        "secondary-container": "#006d3f",
+                        "on-tertiary-container": "#004d57",
+                        "secondary": "#80fab1",
+                        "on-secondary-fixed": "#004a29",
+                        "on-secondary-fixed-variant": "#006a3d",
+                        "on-primary-container": "#002d0b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "xl": "80px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Quicksand"],
+                        "headline-md": ["Quicksand"],
+                        "headline-lg": ["Quicksand"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar (Shared Component Logic) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container-low flex flex-col h-full p-md space-y-base shadow-md z-50 hidden md:flex">
+<div class="mb-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">foodForALL</h1>
+<div class="mt-md flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden">
+<img alt="Vendor Profile" data-alt="Close up professional portrait of a smiling female green grocer in her organic market. The lighting is warm and natural, highlighting fresh vegetables in the background. The aesthetic is clean and vibrant, with soft greens and earthy tones to match a modern sustainable food brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1ygI4zuff5dZ5om5rTHP449JwUopSL_6yEgGoGQPg3R3isiOtvyRmg8en1UiMJdOp0cA7rJfO786m9U24VDLXmWDkHISlrr8ArCOWFzIqZtk8j-w_OiawjFou3NKieWxXgZyLBEuTymXC2d2Rb4664cMMpxPGHJD83D4OBzDM-nipl1oCOnuyoYkBy7lsYprYWD_I-hhgkYJwK9MweHvQ59VEsTLTqkWdKrKy1Z42FLVo1SRjy_MpyGBE97hZy4TP_TcgBchTR8lJ"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Green Grocers</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Verified Vendor</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="fastfood">fastfood</span>
+<span class="font-label-md text-label-md">Listings</span>
+</a>
+<!-- Active State: Analytics -->
+<a class="flex items-center gap-sm px-md py-sm bg-primary-fixed text-on-primary-fixed rounded-xl scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-variant rounded-xl transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-label-md text-label-md">Messages</span>
+</a>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container py-md rounded-full font-label-md text-label-md hover:brightness-110 active:scale-95 transition-all">
+            Post New Item
+        </button>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-64 p-gutter max-w-container-max mx-auto">
+<!-- Header -->
+<header class="flex justify-between items-end mb-lg">
+<div>
+<p class="text-primary font-label-md text-label-md mb-xs">Vendor Performance</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Analytics Overview</h2>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm rounded-lg border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="calendar_today">calendar_today</span>
+                    Last 7 Days
+                </button>
+<button class="px-md py-sm rounded-lg bg-surface-container-high text-primary font-label-md text-label-md hover:brightness-125 transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                    Export Report
+                </button>
+</div>
+</header>
+<!-- Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-lg">
+<!-- Card 1: Total Meals Rescued -->
+<div class="glass-card p-md rounded-full flex flex-col justify-between overflow-hidden relative group">
+<div class="absolute top-0 right-0 p-md opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-primary" data-icon="restaurant">restaurant</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Total Meals Rescued</p>
+<h3 class="font-display-lg text-display-lg text-primary mt-xs">1,284</h3>
+</div>
+<div class="mt-md flex items-center gap-xs text-primary text-caption font-caption">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+<span>12% from last week</span>
+</div>
+</div>
+<!-- Card 2: CO2 Offset -->
+<div class="glass-card p-md rounded-full flex flex-col justify-between overflow-hidden relative group">
+<div class="absolute top-0 right-0 p-md opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-tertiary" data-icon="eco">eco</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">CO2 Offset (kg)</p>
+<h3 class="font-display-lg text-display-lg text-tertiary mt-xs">342.5</h3>
+</div>
+<div class="mt-md flex items-center gap-xs text-tertiary text-caption font-caption">
+<span class="material-symbols-outlined text-[16px]" data-icon="forest">forest</span>
+<span>Equivalent to 15 trees</span>
+</div>
+</div>
+<!-- Card 3: Revenue -->
+<div class="glass-card p-md rounded-full flex flex-col justify-between overflow-hidden relative group">
+<div class="absolute top-0 right-0 p-md opacity-20 group-hover:opacity-40 transition-opacity">
+<span class="material-symbols-outlined text-[64px] text-error" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Revenue Earned</p>
+<h3 class="font-display-lg text-display-lg text-error mt-xs">$4,120</h3>
+</div>
+<div class="mt-md flex items-center gap-xs text-error text-caption font-caption">
+<span class="material-symbols-outlined text-[16px]" data-icon="show_chart">show_chart</span>
+<span>8.4% increase</span>
+</div>
+</div>
+</div>
+<!-- Charts and Lists Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md items-start">
+<!-- Rescue Trends Chart Area -->
+<div class="lg:col-span-8 glass-card rounded-full p-lg">
+<div class="flex justify-between items-center mb-lg">
+<h4 class="font-headline-md text-headline-md text-on-surface">Rescue Trends</h4>
+<div class="flex gap-md">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-caption font-caption text-on-surface-variant">Meals Rescued</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="text-caption font-caption text-on-surface-variant">Revenue ($)</span>
+</div>
+</div>
+</div>
+<!-- Mockup Chart Area -->
+<div class="h-[300px] w-full relative">
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between opacity-10">
+<div class="border-t border-on-surface w-full"></div>
+<div class="border-t border-on-surface w-full"></div>
+<div class="border-t border-on-surface w-full"></div>
+<div class="border-t border-on-surface w-full"></div>
+</div>
+<!-- Decorative Chart SVG -->
+<svg class="absolute inset-0 w-full h-full overflow-visible" preserveaspectratio="none">
+<!-- Rescue Line (Green) -->
+<path d="M0,250 L100,180 L200,210 L300,100 L400,150 L500,80 L600,120 L700,50 L800,90" fill="none" stroke="#6eff84" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+<!-- Revenue Line (Orange/Error) -->
+<path d="M0,280 L100,240 L200,260 L300,180 L400,220 L500,140 L600,190 L700,110 L800,150" fill="none" stroke="#ff7351" stroke-dasharray="8 8" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-8 w-full flex justify-between text-caption font-caption text-on-surface-variant">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Top Performing Items List -->
+<div class="lg:col-span-4 glass-card rounded-full p-lg flex flex-col h-full">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-lg">Top Items</h4>
+<div class="space-y-md">
+<!-- Item 1 -->
+<div class="flex items-center gap-md group">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="Vibrant, high-contrast close-up of organic green vegetables and artisan sourdough bread. The shot is moody and professional, using deep shadows and bright emerald highlights to create a premium, tech-forward food aesthetic. The food looks fresh, crisp, and high-quality, fitting a modern surplus food rescue platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDUpXDYqHJWOYUNlv8-pJO93iMyRuVSzgvxtY5iegrJe8obYZrPqzC8MlfrL7CW8pX2rTAXi1H6x4-137YKmigLVorPiKIq_xFrLvW2KdV6mAg8qfbfolMdvoytxUcZ7kSfw1EoLTy68i2ud8RLluSRCoewtspiVqmf5ZYu7o693huNUTj1ULscJcL6vxD0eucXHqNVpPRxygWawwPtLXiZ7FoduZlqSV4K4_vv_Y04TX6MXTo0T98bHIRsGPud2XHxpsDlmbLlb0Q"/>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Organic Veggie Box</p>
+<p class="text-caption font-caption text-primary">342 Sold</p>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface">$1,420</p>
+<div class="flex items-center text-[10px] text-primary">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_drop_up">arrow_drop_up</span>
+                                5%
+                            </div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-md group">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="Studio shot of artisan crusty bread on a dark background. Strong directional lighting creates dramatic shadows and highlights the texture of the grain. Warm orange tones from the crust contrast beautifully with the deep forest green shadows of the setting. Minimalist and appetizing composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAQLW_Bn5T1vh_AkoFWtRbZVEGlUvKu1dF0x1tHpCwdx1VbmVwuZjCefMBFkMoMEPQvs8BiKY1HPh5-zoBV8bOhCUySv6Y9DOgqBqt_5PQROAfoHa9nnzFWC7M_63fKZbrt6V5-EjqJzw2C_RAeQt5k-QaggUI2cHU2JKmU4DZPqtaAv8yyozhQrWliw7pxhjiBMgSwr3fN3Gd2krmfjOcziHbHeRUkNyzoPG5neLVr-LUoP723awl37Qu3jyYMpS-ZmInHL9NdmqS"/>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Artisan Bakery Bundle</p>
+<p class="text-caption font-caption text-primary">289 Sold</p>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface">$980</p>
+<div class="flex items-center text-[10px] text-primary">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_drop_up">arrow_drop_up</span>
+                                12%
+                            </div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-md group">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" data-alt="High-key photography of mixed tropical fruits in a dark ceramic bowl. The fruits, including mango and citrus, pop with vibrant oranges and yellows against a dark, moody background. Neon green accents from the leaves create a high-energy, modern aesthetic focused on freshness and abundance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU5DFq6cUAAxoIKLHpQybYAyO48clKpFBBTDHHA1er6qIJWA-sf3d6PfqKSg1N7LlLr0oeR1zq2ymR3-htz_q_iLGHr52MF9ad_qWue5B2wDOUit4oKVx4u0UsNajZDggMtGiz9QbHRFdaBq_il_0KsFWIN8Co3iFNpVgKZ8gC5jfCx81imWt_ck4tvMZaniif2Taq95K_mOjclq3Naqy62ZihVI_ttTnPGN3Ld_VlIvBnsBTRHXxZ6eAGd8fwZcNhbh_bTBgJVavt"/>
+</div>
+<div class="flex-grow">
+<p class="font-label-md text-label-md text-on-surface">Tropical Fruit Pack</p>
+<p class="text-caption font-caption text-primary">156 Sold</p>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface">$640</p>
+<div class="flex items-center text-[10px] text-error">
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+                                2%
+                            </div>
+</div>
+</div>
+</div>
+<button class="mt-auto w-full py-sm border-t border-outline-variant text-caption font-caption text-on-surface-variant hover:text-primary transition-colors text-center">
+                    View All Performance
+                </button>
+</div>
+</div>
+<!-- Footer (Shared Component Logic) -->
+<footer class="mt-xl border-t border-outline-variant py-lg flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto">
+<div class="mb-md md:mb-0">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">foodForALL</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">© 2024 foodForALL. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">About Us</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Vendor Portal</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Impact Report</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</footer>
+</main>
+<!-- Mobile Bottom Navigation (Simulated Shared Logic) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container h-16 flex items-center justify-around border-t border-outline-variant z-50">
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] uppercase font-bold">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[10px] uppercase font-bold">Inv</span>
+</a>
+<div class="w-12 h-12 bg-primary rounded-full -mt-8 flex items-center justify-center text-on-primary-container shadow-lg border-4 border-background">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</div>
+<a class="flex flex-col items-center gap-xs text-primary" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="text-[10px] uppercase font-bold">Stats</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="text-[10px] uppercase font-bold">Mail</span>
+</a>
+</nav>
+<script>
+        // Simple Interaction logic for card hover effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>
