@@ -1,9 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function VendorDashboard() {
   const [pricingType, setPricingType] = useState('free'); // 'free' or 'low-cost'
   const [category, setCategory] = useState('');
+  
+  // Camera State
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [photoDataUri, setPhotoDataUri] = useState(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  const startCamera = async () => {
+    setIsCameraOpen(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (err) {
+      console.error("Error accessing camera:", err);
+      alert("Could not access the camera. Please ensure camera permissions are granted.");
+      setIsCameraOpen(false);
+    }
+  };
+
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+    }
+    setIsCameraOpen(false);
+  };
+
+  const capturePhoto = () => {
+    if (videoRef.current && canvasRef.current) {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataUri = canvas.toDataURL('image/jpeg');
+      setPhotoDataUri(dataUri);
+      stopCamera();
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,7 +52,8 @@ export default function VendorDashboard() {
   };
 
   return (
-    <div className="flex pt-16 bg-[#fbf9f5] min-h-screen">
+    <>
+      <div className="flex pt-16 bg-[#fbf9f5] min-h-screen">
       {/* SideNavBar */}
       <aside className="h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container flex-col p-6 space-y-2 shadow-md hidden lg:flex border-r border-outline-variant/20 z-40">
         <div className="flex items-center space-x-3 mb-8">
@@ -100,18 +142,43 @@ export default function VendorDashboard() {
                 </div>
                 <div className="space-y-1">
                   <label className="font-label text-label-md text-[#1b1c1a]/70">Item Image</label>
-                  <div className="flex gap-4">
-                    <label className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors">
-                      <span className="material-symbols-outlined text-[28px] mb-2">upload_file</span>
-                      <span className="font-label text-label-md">Upload Photo</span>
-                      <input type="file" accept="image/*" className="hidden" />
-                    </label>
-                    <label className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors">
-                      <span className="material-symbols-outlined text-[28px] mb-2">photo_camera</span>
-                      <span className="font-label text-label-md">Take Photo</span>
-                      <input type="file" accept="image/*" capture="environment" className="hidden" />
-                    </label>
-                  </div>
+                  {photoDataUri ? (
+                    <div className="relative rounded-lg overflow-hidden border-2 border-primary/50 w-full h-48 group">
+                      <img src={photoDataUri} alt="Captured surplus" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button 
+                          type="button" 
+                          onClick={() => setPhotoDataUri(null)} 
+                          className="bg-white/20 hover:bg-white/40 backdrop-blur-md text-white py-2 px-4 rounded-full font-label text-sm flex items-center space-x-2 transition-colors cursor-pointer"
+                        >
+                          <span className="material-symbols-outlined text-[18px]">delete</span>
+                          <span>Remove Photo</span>
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex gap-4">
+                      <label className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors">
+                        <span className="material-symbols-outlined text-[28px] mb-2">upload_file</span>
+                        <span className="font-label text-label-md">Upload Photo</span>
+                        <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => setPhotoDataUri(e.target.result);
+                            reader.readAsDataURL(e.target.files[0]);
+                          }
+                        }}/>
+                      </label>
+                      <button 
+                        type="button"
+                        onClick={startCamera}
+                        className="flex-1 cursor-pointer border-2 border-dashed border-outline-variant/30 rounded-lg py-6 px-4 flex flex-col items-center justify-center text-[#1b1c1a]/60 hover:bg-[#1b1c1a]/5 hover:text-primary hover:border-primary/50 transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-[28px] mb-2">photo_camera</span>
+                        <span className="font-label text-label-md">Take Photo</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
@@ -341,5 +408,53 @@ export default function VendorDashboard() {
         </Link>
       </nav>
     </div>
+
+      {/* Camera Modal */}
+      {isCameraOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-lg bg-[#1b1c1a] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <div className="p-4 flex justify-between items-center border-b border-white/10">
+              <h3 className="font-headline text-white font-bold text-lg flex items-center space-x-2">
+                <span className="material-symbols-outlined text-primary">camera</span>
+                <span>Take Photo</span>
+              </h3>
+              <button 
+                onClick={stopCamera}
+                className="text-white/60 hover:text-white transition-colors cursor-pointer p-2 rounded-full hover:bg-white/10"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            
+            <div className="relative bg-black aspect-[4/3] flex items-center justify-center">
+              <video 
+                ref={videoRef} 
+                autoPlay 
+                playsInline 
+                className="w-full h-full object-cover"
+              />
+              <canvas ref={canvasRef} className="hidden" />
+              
+              {/* Camera Framing Guidelines */}
+              <div className="absolute inset-0 pointer-events-none border-[1px] border-white/20 m-8 rounded-lg">
+                <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary -mt-[1px] -ml-[1px] rounded-tl"></div>
+                <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary -mt-[1px] -mr-[1px] rounded-tr"></div>
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary -mb-[1px] -ml-[1px] rounded-bl"></div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary -mb-[1px] -mr-[1px] rounded-br"></div>
+              </div>
+            </div>
+            
+            <div className="p-6 flex justify-center bg-[#1b1c1a]">
+              <button 
+                onClick={capturePhoto}
+                className="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+              >
+                <div className="w-12 h-12 bg-white rounded-full group-hover:bg-primary transition-colors"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
