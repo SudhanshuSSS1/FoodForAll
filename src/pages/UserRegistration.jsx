@@ -57,17 +57,41 @@ export default function UserRegistration() {
     setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirm_password) {
       setError('Passwords do not match');
       return;
     }
     
-    // Simulate API call
-    setTimeout(() => {
-      setShowSuccess(true);
-    }, 800);
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          role: 'user',
+          fullName: formData.fullname,
+          dateOfBirth: formData.dob,
+          email: formData.email,
+          phoneNumber: formData.phone,
+          address: formData.address,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || 'Registration failed');
+      } else {
+        setShowSuccess(true);
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Failed to connect to the server');
+    }
   };
 
   const handleGoToDashboard = () => {
