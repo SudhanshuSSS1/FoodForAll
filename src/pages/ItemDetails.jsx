@@ -1,11 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function ItemDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
   const imgRef = useRef(null);
+  const { authFetch } = useAuth();
+
+  useEffect(() => {
+    fetchItem();
+  }, [id]);
+
+  const fetchItem = async () => {
+    try {
+      const res = await authFetch(`/items/${id}`);
+      if (res.ok) {
+        setItem(await res.json());
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Simple parallax on image
   useEffect(() => {
@@ -22,8 +43,18 @@ export default function ItemDetails() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleClaim = () => {
-    setShowModal(true);
+  const handleClaim = async () => {
+    try {
+      const res = await authFetch(`/items/${id}/claim`, { method: 'POST' });
+      if (res.ok) {
+        setShowModal(true);
+      } else {
+        alert('Failed to claim item. It may already be claimed or you are not logged in as a regular user.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error claiming item.');
+    }
   };
 
   const closeModal = () => {
@@ -34,6 +65,9 @@ export default function ItemDetails() {
     setShowModal(false);
     navigate('/');
   };
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-surface">Loading...</div>;
+  if (!item) return <div className="min-h-screen flex items-center justify-center bg-surface">Item not found.</div>;
 
   return (
     <div className="font-body text-body-md bg-surface text-on-surface min-h-screen">
@@ -48,9 +82,7 @@ export default function ItemDetails() {
         <nav className="mb-6 flex items-center gap-2 text-on-surface-variant font-label text-label-md">
           <Link to="/" className="hover:text-primary transition-colors">Find Food</Link>
           <span className="material-symbols-outlined text-[16px]">chevron_right</span>
-          <Link to="#" className="hover:text-primary transition-colors">Bakery</Link>
-          <span className="material-symbols-outlined text-[16px]">chevron_right</span>
-          <span className="text-on-surface font-bold">6-Pack Fresh Bagels</span>
+          <span className="text-on-surface font-bold">{item.title}</span>
         </nav>
 
         {/* Main Product Section */}
@@ -58,36 +90,43 @@ export default function ItemDetails() {
           
           {/* Left: Image Gallery & Description */}
           <div className="lg:col-span-7 space-y-8">
-            <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden bg-surface-container shadow-[0px_4px_20px_rgba(62,123,68,0.08)]">
-              <img 
-                ref={imgRef}
-                className="w-full h-full object-cover transition-transform duration-75 ease-linear scale-110" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSHMPUPAlqSUQ6yQ2xJxc_UQKd7WGdqZrc1kXDiMX0yY5KQFDI819S8Dvx34jas6QD10wrZBzbwOB4jLjtSrdKVH30Se7_fzhkkYgI84MKI35AiDnMr58-8TikQSuh4UhqiFYETe_w0FbTn92I0-Iua14wghV0pX0PUEtAVykPy0XZv7RZSwS-xsODIZ2fb9rAum7QKfPQDWf0tQdh1Z_BfxQ4Uau7EItoiZpzPlrBdjHNZ8Au88FbXJvzndfs1vA8Ug7tILbUt84H"
-                alt="Fresh Bagels"
-              />
+            <div className="aspect-[4/3] w-full rounded-2xl overflow-hidden bg-surface-container shadow-[0px_4px_20px_rgba(62,123,68,0.08)] flex items-center justify-center">
+              {item.imageUrl ? (
+                <img 
+                  ref={imgRef}
+                  className="w-full h-full object-cover transition-transform duration-75 ease-linear scale-110" 
+                  src={item.imageUrl}
+                  alt={item.title}
+                />
+              ) : (
+                <span className="material-symbols-outlined text-[64px] text-primary/30">fastfood</span>
+              )}
             </div>
             
             <div className="bg-surface-container-lowest p-6 md:p-12 rounded-2xl shadow-[0px_4px_20px_rgba(62,123,68,0.08)] space-y-6">
               <div>
-                <h1 className="font-headline text-[32px] text-on-surface mb-2 font-bold">6-Pack Fresh Bagels</h1>
+                <h1 className="font-headline text-[32px] text-on-surface mb-2 font-bold">{item.title}</h1>
                 <div className="flex items-center gap-2 mb-4">
                   <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>store</span>
-                  <span className="font-label text-label-md text-primary font-bold">Daily Crust Bakery</span>
+                  <span className="font-label text-label-md text-primary font-bold">{item.vendor?.shopName || 'Vendor'}</span>
                   <span className="text-outline-variant mx-1">•</span>
-                  <span className="bg-tertiary-container/10 text-tertiary font-label text-[12px] px-3 py-1 rounded-full font-bold">Bakery</span>
+                  <span className="bg-tertiary-container/10 text-tertiary font-label text-[12px] px-3 py-1 rounded-full font-bold capitalize">{item.inventoryItem?.category || 'General'}</span>
                 </div>
                 <p className="text-on-surface-variant font-body text-[18px] leading-relaxed">
-                  These artisanal bagels are baked fresh every morning using locally sourced organic flour. They are boiled and stone-baked for the perfect chewy texture and golden crust.
+                  Price: {item.price === 0 ? 'Free' : `$${item.price}`}
+                </p>
+                <p className="text-on-surface-variant font-body text-[18px] leading-relaxed mt-4">
+                  Pickup address: {item.vendor?.address || 'N/A'}
                 </p>
               </div>
               
               <div className="p-5 bg-surface-container-low rounded-xl border-l-4 border-secondary-container">
                 <h3 className="font-label text-label-md text-on-secondary-fixed-variant font-bold flex items-center gap-2 mb-2">
                   <span className="material-symbols-outlined text-[20px]">info</span>
-                  Why it's listed
+                  Details
                 </h3>
                 <p className="text-on-surface-variant font-body text-[16px]">
-                  End of day surplus. These bagels were baked this morning and are perfectly fresh, but we clear our shelves every evening to make room for tomorrow's batch.
+                  Expiration Date: {item.inventoryItem?.expirationDate ? new Date(item.inventoryItem.expirationDate).toLocaleString() : 'N/A'}
                 </p>
               </div>
             </div>
@@ -109,7 +148,7 @@ export default function ItemDetails() {
                 </div>
                 <div className="text-right">
                   <p className="font-label text-[12px] text-on-surface-variant uppercase tracking-wider font-bold">Quantity</p>
-                  <p className="font-headline text-[24px] text-on-surface font-bold">1 Pack</p>
+                  <p className="font-headline text-[24px] text-on-surface font-bold">{item.inventoryItem?.quantity || 1} Pack</p>
                 </div>
               </div>
               
@@ -120,7 +159,7 @@ export default function ItemDetails() {
                   </div>
                   <div>
                     <p className="font-label text-label-md text-on-surface font-bold">Pickup Window</p>
-                    <p className="text-on-surface-variant font-body">Today, 6:00 PM - 8:00 PM</p>
+                    <p className="text-on-surface-variant font-body">{item.inventoryItem?.expirationDate ? new Date(item.inventoryItem.expirationDate).toLocaleDateString() : 'Today'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -129,7 +168,7 @@ export default function ItemDetails() {
                   </div>
                   <div>
                     <p className="font-label text-label-md text-on-surface font-bold">Location</p>
-                    <p className="text-on-surface-variant font-body">42nd Baker St, Community Plaza</p>
+                    <p className="text-on-surface-variant font-body">{item.vendor?.address || '42nd Baker St, Community Plaza'}</p>
                   </div>
                 </div>
               </div>

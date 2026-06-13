@@ -1,15 +1,37 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function VendorDashboard() {
   const [pricingType, setPricingType] = useState('free'); // 'free' or 'low-cost'
   const [category, setCategory] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [stats, setStats] = useState({ totalInventory: 0, activeListings: 0, totalClaims: 0 });
+  const [listings, setListings] = useState([]);
+  const { authFetch, user } = useAuth();
   
   // Camera State
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [photoDataUri, setPhotoDataUri] = useState(null);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      const statsRes = await authFetch('/vendor/dashboard/stats');
+      if (statsRes.ok) setStats(await statsRes.json());
+      
+      const listRes = await authFetch('/vendor/listings');
+      if (listRes.ok) setListings(await listRes.json());
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const startCamera = async () => {
     setIsCameraOpen(true);
@@ -46,9 +68,29 @@ export default function VendorDashboard() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Surplus published successfully!');
+    try {
+      const res = await authFetch('/vendor/inventory', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: itemName,
+          description: 'Quick listed from dashboard',
+          quantity: parseInt(quantity) || 1,
+          category,
+        })
+      });
+      if (res.ok) {
+        alert('Surplus added to inventory successfully!');
+        setItemName('');
+        setQuantity('');
+        setCategory('');
+        fetchDashboardData();
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Failed to publish surplus');
+    }
   };
 
   return (
@@ -65,7 +107,7 @@ export default function VendorDashboard() {
             />
           </div>
           <div>
-            <h3 className="font-headline text-[18px] font-bold text-primary">Green Grocers</h3>
+            <h3 className="font-headline text-[18px] font-bold text-primary">{user?.shopName || 'Green Grocers'}</h3>
             <p className="font-label text-[12px] text-on-surface-variant">Verified Vendor</p>
           </div>
         </div>
@@ -104,7 +146,7 @@ export default function VendorDashboard() {
           {/* Welcome Section */}
           <header>
             <h1 className="font-headline text-headline-lg text-on-surface">Vendor Dashboard</h1>
-            <p className="font-body text-body-md text-on-surface/70">Good morning, Green Grocers. Let's make sure no good food goes to waste today.</p>
+            <p className="font-body text-body-md text-on-surface/70">Good morning, {user?.fullName || 'Vendor'}. Let's make sure no good food goes to waste today.</p>
           </header>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -118,7 +160,7 @@ export default function VendorDashboard() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1">
                   <label className="font-label text-label-md text-on-surface/70">Item Name</label>
-                  <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="e.g., Organic Bananas (Bunch)" type="text" />
+                  <input required value={itemName} onChange={e => setItemName(e.target.value)} className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="e.g., Organic Bananas (Bunch)" type="text" />
                 </div>
                 <div className="space-y-1">
                   <label className="font-label text-label-md text-on-surface/70">Category</label>
@@ -183,7 +225,7 @@ export default function VendorDashboard() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="font-label text-label-md text-on-surface/70">Quantity</label>
-                    <input required className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="5kg / 3 units" type="text" />
+                    <input required value={quantity} onChange={e => setQuantity(e.target.value)} className="w-full bg-surface border border-outline-variant/20 rounded-lg focus:ring-2 focus:ring-primary h-12 px-4 font-body outline-none" placeholder="5kg / 3 units" type="text" />
                   </div>
                   <div className="space-y-1">
                     <label className="font-label text-label-md text-on-surface/70">Expiry Time</label>
@@ -244,7 +286,7 @@ export default function VendorDashboard() {
             <section className="md:col-span-7 bg-primary-container text-on-primary-container rounded-2xl p-6 md:p-8 relative overflow-hidden flex flex-col justify-between shadow-[0px_4px_20px_rgba(62,123,68,0.15)]">
               <div className="relative z-10">
                 <h2 className="font-headline text-[24px] font-bold mb-1">Today's Impact</h2>
-                <p className="font-body opacity-90 max-w-[280px]">You have rescued 42 meals for your local community today.</p>
+                <p className="font-body opacity-90 max-w-[280px]">You have {stats.activeListings} active listings and {stats.totalClaims} claimed items.</p>
               </div>
               
               <div className="relative h-40 mt-6">
@@ -263,12 +305,12 @@ export default function VendorDashboard() {
               <div className="mt-8 flex justify-between items-end relative z-10">
                 <div className="flex space-x-3">
                   <div className="bg-on-primary-container/10 p-3 rounded-xl backdrop-blur-md border border-on-primary-container/10">
-                    <p className="font-label text-[12px] opacity-70">CO2 Saved</p>
-                    <p className="font-headline text-[20px] font-bold">12.4kg</p>
+                    <p className="font-label text-[12px] opacity-70">Total Stock</p>
+                    <p className="font-headline text-[20px] font-bold">{stats.totalInventory}</p>
                   </div>
                   <div className="bg-on-primary-container/10 p-3 rounded-xl backdrop-blur-md border border-on-primary-container/10">
-                    <p className="font-label text-[12px] opacity-70">Lives Touched</p>
-                    <p className="font-headline text-[20px] font-bold">18</p>
+                    <p className="font-label text-[12px] opacity-70">Total Claims</p>
+                    <p className="font-headline text-[20px] font-bold">{stats.totalClaims}</p>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-[64px] opacity-20">compost</span>
@@ -302,82 +344,36 @@ export default function VendorDashboard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-surface">
-                  {/* Row 1 */}
-                  <tr className="hover:bg-surface/50 transition-colors group">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
-                          <img alt="Fresh Greens" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqv9w21iobp7ZMuztv-7OstJ2KMZ3q1wu_c1B4GX1ofUW3kp57T7bRPCNa8T0cINgTuQZdXiOTloiUBdhfQeYoZwaTcdWpYIp-JUkENxiTwlDr_PPChYo74jkAawZosGy6kmCaSnqnJck_3jdq5dxOnws7nTEloSsnxcOlBMn8uTXRUwp1rNiqc1T1oS0-sv-KtffZkI4ErJFbC8w7r4Qtic8BT_rwcVeNYnINqFHmQGM5lfzOKoayoYbrVK9Wl7HzRvtyXDvicWXw" />
+                  {listings.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" className="px-6 py-4 text-center text-on-surface/50">No active listings</td>
+                    </tr>
+                  ) : listings.map(listing => (
+                    <tr key={listing.id} className="hover:bg-surface/50 transition-colors group">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center space-x-3">
+                          <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0 flex items-center justify-center text-primary/50">
+                            <span className="material-symbols-outlined">fastfood</span>
+                          </div>
+                          <div>
+                            <p className="font-label font-bold text-on-surface">{listing.title}</p>
+                            <p className="font-caption text-on-surface/60">Listed on {new Date(listing.createdAt).toLocaleDateString()}</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="font-label font-bold text-on-surface">Fresh Kale Mix</p>
-                          <p className="font-caption text-on-surface/60">Listed 2h ago</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">12 Bags</td>
-                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">45m</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-primary-container/20 text-primary-container font-label text-[12px] font-bold rounded-full">
-                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                        <span>Available</span>
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
-                    </td>
-                  </tr>
-                  
-                  {/* Row 2 */}
-                  <tr className="hover:bg-surface/50 transition-colors group">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
-                          <img alt="Orange Slices" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBZyHDEoIIrJzDoGKKDhK0AyACdU_cy6A9nrHN1RBuZvreOJ3HH7TRTvlpg7FmF_zrpI-HjexXsYYUeajiepDRUlDl9CFZBLwSm-bexuMtv1-QmIvNhWX7G5dz9M2tVJAMV5RLA49AfnPx4GUSQnQjLyqPRxy-XVljJ44eysX_NCwqvhxBT-kYvf2ifEgKK5EIgX2WdduZHJZzYSRreHue0B72jMtZusGHgTeqMpbNFdT75Z5U24UJkkSOFG3zVpvpB30mS0bvr40n" />
-                        </div>
-                        <div>
-                          <p className="font-label font-bold text-on-surface">Sunkist Oranges</p>
-                          <p className="font-caption text-on-surface/60">Listed 4h ago</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">4 Boxes</td>
-                    <td className="px-6 py-4 font-body text-on-surface/50 whitespace-nowrap">Expired</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-secondary-container/20 text-on-secondary-container font-label text-[12px] font-bold rounded-full">
-                        <span>Claimed</span>
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
-                    </td>
-                  </tr>
-                  
-                  {/* Row 3 */}
-                  <tr className="hover:bg-surface/50 transition-colors group">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-12 h-12 rounded-xl bg-surface-container overflow-hidden shrink-0">
-                          <img alt="Sourdough Bread" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRTuOn3AjmH2T1y2WkZjzwYeWCQKj-w7E2VcZBtiIImzqAnLZWIq5qa6fQxswa0SPDZMDaRxsRfx5nbM0js8Lq67MxUHaZzJunQpgz-PyUiyMo0bNFXEaNi3aYoIpZdj6Vuyv6ICofP_wDNBc67hpHC9yosHpQ5ut2UyEkJG20Au9ygjcS6l93rpse4TGAEMu6ml7mkEMRLuQtFe08LJjzVsW_JFS-h7DqS2PyjnJ3qbYS7BabwC7SlEL0Bwx8syn0EXC7XWIIHQQb" />
-                        </div>
-                        <div>
-                          <p className="font-label font-bold text-on-surface">Daily Sourdough</p>
-                          <p className="font-caption text-on-surface/60">Listed 15m ago</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">8 Loaves</td>
-                    <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">6h</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex items-center space-x-1.5 px-3 py-1 bg-primary-container/20 text-primary-container font-label text-[12px] font-bold rounded-full">
-                        <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                        <span>Available</span>
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
-                    </td>
-                  </tr>
+                      </td>
+                      <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">{listing.inventoryItem?.quantity || '-'}</td>
+                      <td className="px-6 py-4 font-body text-on-surface whitespace-nowrap">{listing.inventoryItem?.expirationDate || '-'}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-flex items-center space-x-1.5 px-3 py-1 font-label text-[12px] font-bold rounded-full ${listing.status === 'active' ? 'bg-primary-container/20 text-primary-container' : 'bg-secondary-container/20 text-on-secondary-container'}`}>
+                          {listing.status === 'active' && <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>}
+                          <span className="capitalize">{listing.status}</span>
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button className="material-symbols-outlined text-on-surface/50 hover:text-primary cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

@@ -1,58 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const categories = ['All Items', 'Free', 'Paid', 'Bakery', 'Produce', 'Ready Meals'];
-
-const mockItems = [
-  {
-    id: 1,
-    name: 'Artisan Bakery Co.',
-    title: 'Mixed pastry bag and whole wheat loaves.',
-    price: 'FREE',
-    distance: '0.5 miles away',
-    timeLeft: '2h left',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuqh5NppJi9r3KWQ4oIri6qtbUgwm8ToCaSxcA2RzCC1_muyW1AkyJAd_alKerIl9x4GhgFKxsAMqqNlxYhfPMmM7ciGtO22m-hu_2zM58Cf-yh_fmS9G8VTee87-v1r65gAzel2CQFUqrSOtxOzFdMz7UeC-_VikRwxf0lYd1b-nTJgAHvjhxOgWoDcr4_dg1bzs0leLuND5LY7MawpM4MmezGuDLMYyLgo_To3EV57mgCr_w1vjf-UnWPphK7qfiD9NhCthCwuaA',
-    categories: ['Free', 'Bakery'],
-  },
-  {
-    id: 2,
-    name: 'Green Grocers',
-    title: 'Organic vegetable surplus box (5kg).',
-    price: '$3.50',
-    distance: '1.2 miles away',
-    timeLeft: '4h left',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQlLJwR2HESbmNrNLf8YHUOHATNxm5I2lR73W9VtubD6sXFTkc0_wJbH7WxKO3uRwvyJ2NNaMso3M-IQem4R7FROqR8uOdHx-_dbwvl5rGn54GkvjVcsj7Nzaiomu_cFjTf3S94OJgdeIhc7KB42mw-il505dN9-RT3rvgl2gbnHVFEVO3lgtXNwGz8uwpVNaMqQpW69pFepff0KGSNLpY_el40Oit0dRlCzgFJpGyViKu67vg23o0s4j-BilmaJUOxGShlyr6OiGY',
-    categories: ['Paid', 'Produce'],
-  },
-  {
-    id: 3,
-    name: 'Healthy Habits Cafe',
-    title: 'Salmon Poke Bowl & Green Smoothie.',
-    price: '$4.99',
-    distance: '0.8 miles away',
-    timeLeft: '45m left',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBdJbb1wpK2UKGVQddpLHI80_DOTOpDvG6BuvbkExfgRB02asO9vXksZyNZ0DzyYcIRU_Ub_2IpcGOCtIaU8CKY3It95sqTBnfWBOga_YEjwUoeLtpiTypbPS_EzkPmggVatzOvkxEcu8FUNiMHZ1Bvd3h8fQlm1K0f0RCRHxMtqsQC06oBBZnrzSfiVUo7KQM5__41zIYmdiOrKYZaBNUNQia74rWhvifzPmgjVKF7TRLySOtNGcTKYj3oQOZfklph0e6ds5LiCU4R',
-    categories: ['Paid', 'Ready Meals'],
-  },
-  {
-    id: 4,
-    name: 'Sunnyside Market',
-    title: 'Box of seasonal mixed fruits.',
-    price: 'FREE',
-    distance: '2.5 miles away',
-    timeLeft: '3h left',
-    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZuv351QYJGV5F8vx2ofniGcrS2INbXGJy1Tqc-XASNWeQcX2V0a7of03evOcAFQKDh9txdeUib3ymrx8g8jqJCx5hG4PodLIqAeOaCztIkw0JriJ0Pkd9pIqsdXKcAy7QuSgEL8ibzYwgO6L-9YSc6CnSjxlUFse-aXNMKTBxwWbaQET4GyGASLhkCZmqVTJsmu8zC20n-7c-_1t6TvL9l1xgq0O_hfS21On_e2LTrSzZeKw7qfX7HXTrs-P75iwjOTjLR4T9N1Zo',
-    categories: ['Free', 'Produce'],
-  }
-];
 
 const FindFood = () => {
   const [view, setView] = useState('list');
   const [activeCategory, setActiveCategory] = useState('All Items');
+  const [items, setItems] = useState([]);
+  const { authFetch } = useAuth();
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  const fetchItems = async () => {
+    try {
+      // FindFood is public, but we can use authFetch to easily get the base API URL
+      const res = await authFetch('/items');
+      if (res.ok) setItems(await res.json());
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const filteredItems = activeCategory === 'All Items'
-    ? mockItems
-    : mockItems.filter(item => item.categories.includes(activeCategory));
+    ? items
+    : items.filter(item => item.inventoryItem?.category === activeCategory.toLowerCase());
 
   return (
     <main className="max-w-[1280px] mx-auto px-6 py-6 pt-24 min-h-screen">
@@ -126,23 +100,23 @@ const FindFood = () => {
                 <img
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   alt={item.title}
-                  src={item.img}
+                  src={item.imageUrl || "https://lh3.googleusercontent.com/aida-public/AB6AXuDuqh5NppJi9r3KWQ4oIri6qtbUgwm8ToCaSxcA2RzCC1_muyW1AkyJAd_alKerIl9x4GhgFKxsAMqqNlxYhfPMmM7ciGtO22m-hu_2zM58Cf-yh_fmS9G8VTee87-v1r65gAzel2CQFUqrSOtxOzFdMz7UeC-_VikRwxf0lYd1b-nTJgAHvjhxOgWoDcr4_dg1bzs0leLuND5LY7MawpM4MmezGuDLMYyLgo_To3EV57mgCr_w1vjf-UnWPphK7qfiD9NhCthCwuaA"}
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1">
                   <span className="material-symbols-outlined text-secondary text-[16px]">timer</span>
-                  <span className="font-label-md text-[12px] text-secondary">{item.timeLeft}</span>
+                  <span className="font-label-md text-[12px] text-secondary">{item.inventoryItem?.expirationDate || 'N/A'}</span>
                 </div>
               </div>
               <div className="p-6 space-y-1">
                 <div className="flex justify-between items-start">
-                  <h3 className="font-headline-md text-body-lg text-primary">{item.name}</h3>
-                  <span className={`font-label-md text-label-md font-bold ${item.price === 'FREE' ? 'text-secondary' : 'text-primary'}`}>
-                    {item.price}
+                  <h3 className="font-headline-md text-body-lg text-primary">{item.vendor?.shopName || 'Vendor'}</h3>
+                  <span className={`font-label-md text-label-md font-bold ${item.price === 0 ? 'text-secondary' : 'text-primary'}`}>
+                    {item.price === 0 ? 'FREE' : `$${item.price}`}
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-on-surface-variant">
                   <span className="material-symbols-outlined text-[18px]">location_on</span>
-                  <span className="font-body-md text-caption">{item.distance}</span>
+                  <span className="font-body-md text-caption">{item.vendor?.address || 'Nearby'}</span>
                 </div>
                 <p className="font-body-md text-body-md text-on-surface-variant line-clamp-1">{item.title}</p>
                 <div className="w-full text-center mt-6 py-2 rounded-lg border-2 border-primary-container text-primary font-label-md text-label-md group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">View Details</div>

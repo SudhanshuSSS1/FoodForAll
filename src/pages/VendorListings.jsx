@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function VendorListings() {
+  const [listings, setListings] = useState([]);
+  const { authFetch, user } = useAuth();
+
+  useEffect(() => {
+    fetchListings();
+  }, []);
+
+  const fetchListings = async () => {
+    try {
+      const res = await authFetch('/vendor/listings');
+      if (res.ok) setListings(await res.json());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const activeCount = listings.filter(l => l.status === 'active').length;
+  const claimedCount = listings.filter(l => l.status === 'claimed').length;
+  const expiredCount = listings.filter(l => l.status === 'expired').length;
+
   return (
     <div className="bg-surface text-on-surface min-h-screen font-body pt-16">
       {/* SideNavBar Anchor */}
@@ -15,7 +36,7 @@ export default function VendorListings() {
             />
           </div>
           <div>
-            <p className="font-label-md text-[14px] font-semibold text-on-surface">Green Grocers</p>
+            <p className="font-label-md text-[14px] font-semibold text-on-surface">{user?.shopName || 'Green Grocers'}</p>
             <p className="text-[10px] uppercase tracking-wider text-primary font-bold">Verified Vendor</p>
           </div>
         </div>
@@ -71,121 +92,77 @@ export default function VendorListings() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-primary hover:bg-surface-container transition-colors">
             <p className="font-label-md text-[14px] text-on-surface-variant">Active Rescues</p>
-            <p className="font-headline-md text-[24px] font-bold text-primary mt-2">12 Items</p>
+            <p className="font-headline-md text-[24px] font-bold text-primary mt-2">{activeCount} Items</p>
           </div>
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
-            <p className="font-label-md text-[14px] text-on-surface-variant">Claimed Today</p>
-            <p className="font-headline-md text-[24px] font-bold text-tertiary mt-2">240kg</p>
+            <p className="font-label-md text-[14px] text-on-surface-variant">Claimed Total</p>
+            <p className="font-headline-md text-[24px] font-bold text-tertiary mt-2">{claimedCount} Items</p>
           </div>
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-secondary hover:bg-surface-container transition-colors">
-            <p className="font-label-md text-[14px] text-on-surface-variant">Est. Impact</p>
-            <p className="font-headline-md text-[24px] font-bold text-secondary mt-2">$1,240</p>
+            <p className="font-label-md text-[14px] text-on-surface-variant">Total Listings</p>
+            <p className="font-headline-md text-[24px] font-bold text-secondary mt-2">{listings.length}</p>
           </div>
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl border-l-4 border-l-error hover:bg-surface-container transition-colors">
-            <p className="font-label-md text-[14px] text-on-surface-variant">Expiring Soon</p>
-            <p className="font-headline-md text-[24px] font-bold text-error mt-2">3 Items</p>
+            <p className="font-label-md text-[14px] text-on-surface-variant">Expired</p>
+            <p className="font-headline-md text-[24px] font-bold text-error mt-2">{expiredCount} Items</p>
           </div>
         </div>
 
         {/* Filter Tabs */}
         <div className="flex border-b border-outline-variant mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide gap-2">
-          <button className="px-6 py-3 font-bold text-[14px] text-primary border-b-2 border-primary active:scale-95 transition-all">Active (12)</button>
-          <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Scheduled (4)</button>
-          <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Expired (8)</button>
-          <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Claimed (45)</button>
+          <button className="px-6 py-3 font-bold text-[14px] text-primary border-b-2 border-primary active:scale-95 transition-all">All ({listings.length})</button>
+          <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Active ({activeCount})</button>
+          <button className="px-6 py-3 font-bold text-[14px] text-on-surface-variant hover:text-on-surface transition-all">Claimed ({claimedCount})</button>
         </div>
 
         {/* Listings Grid (Bento Style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Listing Card 1: Urgent */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
-            <div className="relative h-48 overflow-hidden">
-              <img 
-                alt="Organic Sourdough" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSf6XfzFwpBbKYZe94aF6JzJUVBRy8hKsZxS7_00s9MOzfpk1veJVVWrY7-RZmY7uwa3Dse-YH0R4ZuiCuYBcVLs7Pu_eAMSkSD_WM-2vyozQltw3Z9S4gJ-WxblkioL1g-M0zIsnkmkoYBp3GxCknTjqhe7sIiBmFF-FG9vPvvr6vQJgapPwV_jgADoLHQ6e3MCb4yXuZF1hbM1lOKvKdduYAA-nff0YcO6OQh6OSft92euf_hsIQnjEy3Qmh_aNUqnAo43p2nRM_" 
-              />
-              <div className="absolute top-3 right-3 bg-error text-white px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1 shadow-md">
-                <span className="material-symbols-outlined text-[14px]">schedule</span>
-                Expiring: 42m
-              </div>
-              <div className="absolute bottom-3 left-3 bg-primary/90 text-on-primary-container px-3 py-1 rounded-full text-[12px] font-bold backdrop-blur-md shadow-md">
-                Bakery
-              </div>
-            </div>
-            <div className="p-6 flex-grow flex flex-col">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-headline-md text-[20px] font-bold text-primary">Organic Sourdough</h3>
-                <span className="text-tertiary-fixed font-bold text-[20px]">Free</span>
-              </div>
-              <div className="flex items-center gap-3 text-on-surface-variant font-label-md text-[14px] mb-6 flex-grow">
-                <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[18px]">inventory</span>
-                  15 Loaves
+          {listings.map(listing => (
+            <div key={listing.id} className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
+              <div className="relative h-48 overflow-hidden bg-surface-variant flex items-center justify-center">
+                {listing.imageUrl ? (
+                  <img alt={listing.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src={listing.imageUrl} />
+                ) : (
+                  <span className="material-symbols-outlined text-[48px] text-primary/30">fastfood</span>
+                )}
+                <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1 shadow-md ${listing.status === 'active' ? 'bg-primary-container text-on-primary-container' : 'bg-surface-container-high text-on-surface-variant'}`}>
+                  <span className="material-symbols-outlined text-[14px]">info</span>
+                  <span className="capitalize">{listing.status}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[18px]">location_on</span>
-                  0.2 miles
+                <div className="absolute bottom-3 left-3 bg-primary/90 text-on-primary-container px-3 py-1 rounded-full text-[12px] font-bold backdrop-blur-md shadow-md capitalize">
+                  {listing.inventoryItem?.category || 'General'}
                 </div>
               </div>
-              <div className="flex gap-3">
-                <button className="flex-1 bg-surface-variant text-on-surface py-2 rounded-full font-bold hover:bg-outline-variant transition-colors flex items-center justify-center gap-1 cursor-pointer">
-                  <span className="material-symbols-outlined text-[18px]">edit</span>
-                  Edit
-                </button>
-                <button className="flex-1 bg-error-container text-on-error-container py-2 rounded-full font-bold hover:opacity-80 transition-opacity flex items-center justify-center gap-1 cursor-pointer">
-                  <span className="material-symbols-outlined text-[18px]">close</span>
-                  Close
-                </button>
+              <div className="p-6 flex-grow flex flex-col">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-headline-md text-[20px] font-bold text-primary">{listing.title}</h3>
+                  <span className="text-tertiary-fixed font-bold text-[20px]">{listing.price === 0 ? 'Free' : `$${listing.price}`}</span>
+                </div>
+                <div className="flex items-center gap-3 text-on-surface-variant font-label-md text-[14px] mb-6 flex-grow">
+                  <div className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[18px]">inventory</span>
+                    {listing.inventoryItem?.quantity || 1} Units
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[18px]">schedule</span>
+                    {new Date(listing.createdAt).toLocaleDateString()}
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <button className="flex-1 bg-surface-variant text-on-surface py-2 rounded-full font-bold hover:bg-outline-variant transition-colors flex items-center justify-center gap-1 cursor-pointer">
+                    <span className="material-symbols-outlined text-[18px]">edit</span>
+                    Edit
+                  </button>
+                  <button className="flex-1 bg-error-container text-on-error-container py-2 rounded-full font-bold hover:opacity-80 transition-opacity flex items-center justify-center gap-1 cursor-pointer">
+                    <span className="material-symbols-outlined text-[18px]">close</span>
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
 
-          {/* Listing Card 2: Normal */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group">
-            <div className="relative h-48 overflow-hidden">
-              <img 
-                alt="Assorted Tropical Fruits" 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcJs9Ccx6OwU47NMgVoSXnH50LpkoDPV0KjYgyCV86UaXeqNBGpuF9NfnMCcbD2LzDXyb3cCNvyKG6G5IRIj6liC1g4QljtU8PRnLz6W-JkgONfJPgp2cWIZZIFjbna096Cph6XvHLiROCEy9VJzydodAS3Vw3Q58tb0k1LDIyZ7CBnC95hroIRtJ1M2EoekH6j8q5EeBsq12Bi11YFO0XOE56toouDtZC1o0-32poU7pMfEfd_HDM_XVSdvtZfFdV2CLfKLtdN2OB" 
-              />
-              <div className="absolute top-3 right-3 bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-[12px] font-bold flex items-center gap-1 shadow-md">
-                <span className="material-symbols-outlined text-[14px]">schedule</span>
-                Expiring: 4h 15m
-              </div>
-              <div className="absolute bottom-3 left-3 bg-primary/90 text-on-primary-container px-3 py-1 rounded-full text-[12px] font-bold backdrop-blur-md shadow-md">
-                Produce
-              </div>
-            </div>
-            <div className="p-6 flex-grow flex flex-col">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="font-headline-md text-[20px] font-bold text-primary">Tropical Fruit Box</h3>
-                <span className="text-on-surface font-bold text-[20px]">$2.50</span>
-              </div>
-              <div className="flex items-center gap-3 text-on-surface-variant font-label-md text-[14px] mb-6 flex-grow">
-                <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[18px]">inventory</span>
-                  4 Units
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[18px]">scale</span>
-                  ~8kg Total
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <button className="flex-1 bg-surface-variant text-on-surface py-2 rounded-full font-bold hover:bg-outline-variant transition-colors flex items-center justify-center gap-1 cursor-pointer">
-                  <span className="material-symbols-outlined text-[18px]">edit</span>
-                  Edit
-                </button>
-                <button className="flex-1 bg-error-container text-on-error-container py-2 rounded-full font-bold hover:opacity-80 transition-opacity flex items-center justify-center gap-1 cursor-pointer">
-                  <span className="material-symbols-outlined text-[18px]">close</span>
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Listing Card 3: New Listing CTA */}
+          {/* New Listing CTA */}
           <button className="border-2 border-dashed border-outline-variant rounded-3xl flex flex-col items-center justify-center p-12 hover:border-primary/60 hover:bg-surface-container-low transition-all group cursor-pointer min-h-[350px]">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <span className="material-symbols-outlined text-primary text-[48px]">add_circle</span>
@@ -195,68 +172,6 @@ export default function VendorListings() {
               Quickly add surplus food to the rescue network.
             </p>
           </button>
-
-          {/* Listing Card 4: Detailed Info Layout */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl overflow-hidden flex flex-col hover:border-primary/40 transition-all group col-span-1 lg:col-span-2">
-            <div className="flex flex-col md:flex-row h-full">
-              <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
-                <img 
-                  alt="Salad Bowl" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA66Y3VggwjAcfXFeI0qErz_DzIjLnmy_CgoxVty5HSvPV4vzopoLaxkJkxpCfbks9wweqgupXKZ2TSPKmFWb7YTqfkGoW1_YGBpb5SXfYY983KIqQb51vnOS2CkOBMd4yh_YAhufOIhccQ8M5v-GFCcqhGhxLCHrMaoCC3JWe9jEuNBFE8Hpg_pPaK43cjeA_s9gMZUG1kwaBRJKyGeFixt72hsRz9ORy2j6U6NfT-hvyYYGz9a9yqC8V0o-XXt3znTaPAB_OPR0xR" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent md:hidden"></div>
-              </div>
-              <div className="md:w-1/2 p-8 flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-bold text-[10px]">RESCUE READY</span>
-                  <span className="text-on-surface-variant text-[12px] font-bold">• Ready in 15m</span>
-                </div>
-                <h3 className="font-headline-md text-[24px] font-bold text-primary mb-3">Premium Salad Bowls</h3>
-                <p className="font-body-md text-[16px] text-on-surface-variant mb-6">
-                  Assorted daily salads including Caesar, Mediterranean, and Quinoa bowls. Perfectly fresh, packaged for easy transport.
-                </p>
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div>
-                    <p className="font-bold text-on-surface-variant uppercase text-[10px] tracking-widest mb-1">Quantity</p>
-                    <p className="font-headline-md text-[20px] font-bold text-on-surface">8 Bowls</p>
-                  </div>
-                  <div>
-                    <p className="font-bold text-on-surface-variant uppercase text-[10px] tracking-widest mb-1">Price</p>
-                    <p className="font-headline-md text-[20px] font-bold text-tertiary-fixed">Free</p>
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <button className="bg-primary text-on-primary font-bold px-6 py-3 rounded-full flex items-center justify-center gap-2 hover:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all cursor-pointer">
-                    <span className="material-symbols-outlined">edit</span>
-                    Quick Edit
-                  </button>
-                  <button className="p-3 rounded-full border border-outline-variant text-on-surface-variant hover:text-error hover:border-error transition-all cursor-pointer">
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Listing Card 5: Expiring Soon Small Card */}
-          <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 rounded-3xl p-6 flex flex-col justify-between border-l-8 border-l-error">
-            <div>
-              <div className="flex justify-between items-start mb-6">
-                <div className="bg-error/10 text-error p-3 rounded-xl flex items-center justify-center">
-                  <span className="material-symbols-outlined">warning</span>
-                </div>
-                <span className="text-error font-bold text-[14px]">EXPIRING</span>
-              </div>
-              <h3 className="font-headline-md text-[20px] font-bold text-on-surface mb-2">Daily Pastry Mix</h3>
-              <p className="text-on-surface-variant text-[14px]">Expiring in 18 minutes. Boost listing?</p>
-            </div>
-            <div className="mt-8">
-              <button className="w-full bg-error-container text-on-error-container py-3 rounded-full font-bold hover:bg-error-container/80 transition-colors cursor-pointer">
-                Close Listing Now
-              </button>
-            </div>
-          </div>
         </div>
       </main>
 

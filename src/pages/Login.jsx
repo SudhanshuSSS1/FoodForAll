@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -7,19 +8,30 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [authStatus, setAuthStatus] = useState('idle'); // 'idle', 'authenticating', 'success'
 
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const { login } = useAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setAuthStatus('authenticating');
+    setErrorMsg('');
     
-    // Simulate authentication
-    setTimeout(() => {
+    const result = await login(email, password);
+    
+    if (result.success) {
       setAuthStatus('success');
       setTimeout(() => {
         setAuthStatus('idle');
-        navigate(role === 'vendor' ? '/vendor/dashboard' : '/'); // Redirect based on role
-      }, 1500);
-    }, 1000);
+        navigate(result.role === 'vendor' ? '/vendor/dashboard' : '/'); // Redirect based on actual role
+      }, 1000);
+    } else {
+      setAuthStatus('idle');
+      setErrorMsg(result.message);
+    }
   };
+
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 pt-24 pb-12 relative overflow-hidden bg-surface">
@@ -56,13 +68,19 @@ export default function Login() {
             </button>
           </div>
           
+          {errorMsg && (
+            <div className="mb-4 p-3 bg-error-container/20 border border-error/50 rounded-lg text-error text-sm text-center">
+              {errorMsg}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Field */}
             <div className="space-y-1 group">
               <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors ml-1 block" htmlFor="email">Email ID</label>
               <div className="relative rounded-xl focus-within:shadow-[0_0_15px_rgba(110,255,132,0.15)] transition-all">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
-                <input required className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-3 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="email" placeholder="name@example.com" type="email" />
+                <input required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-3 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="email" placeholder="name@example.com" type="email" />
               </div>
             </div>
             
@@ -71,7 +89,7 @@ export default function Login() {
               <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors ml-1 block" htmlFor="password">Password</label>
               <div className="relative rounded-xl focus-within:shadow-[0_0_15px_rgba(110,255,132,0.15)] transition-all">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
-                <input required className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-11 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="password" placeholder="••••••••" type={showPassword ? 'text' : 'password'} />
+                <input required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-11 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="password" placeholder="••••••••" type={showPassword ? 'text' : 'password'} />
                 <button 
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary cursor-pointer select-none" 
                   onClick={() => setShowPassword(!showPassword)} 

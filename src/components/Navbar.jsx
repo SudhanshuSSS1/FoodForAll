@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+  };
 
   const handleThemeToggle = () => {
     if (theme === 'system') setTheme('light');
@@ -51,13 +58,28 @@ export default function Navbar() {
             <span className="material-symbols-outlined text-[20px]">{getThemeIcon()}</span>
           </button>
           <div className="hidden sm:flex items-center gap-6 mr-2">
-            <Link to="/login" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Log In</Link>
-            <Link to="/signup" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Sign Up</Link>
+            {!user ? (
+              <>
+                <Link to="/login" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Log In</Link>
+                <Link to="/signup" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Sign Up</Link>
+              </>
+            ) : (
+              <>
+                {user.role === 'vendor' ? (
+                  <Link to="/vendor/dashboard" className="font-label text-on-surface hover:text-primary transition-colors duration-200">Dashboard</Link>
+                ) : (
+                  <span className="font-label text-on-surface-variant">Hi, {user.fullName.split(' ')[0]}</span>
+                )}
+                <button onClick={handleLogout} className="font-label text-error hover:text-error/80 transition-colors duration-200 cursor-pointer">Log Out</button>
+              </>
+            )}
           </div>
           {/* primary-container=#11b948, on-primary-container=#002a09 — good contrast */}
-          <Link to="/register" className="bg-primary-container text-on-primary-container px-6 py-2 rounded-xl font-headline text-[16px] font-bold active:scale-[0.98] hover:bg-primary-fixed-dim transition-all duration-150 shadow-md shadow-primary/20">
-            Get Started
-          </Link>
+          {!user && (
+            <Link to="/register" className="bg-primary-container text-on-primary-container px-6 py-2 rounded-xl font-headline text-[16px] font-bold active:scale-[0.98] hover:bg-primary-fixed-dim transition-all duration-150 shadow-md shadow-primary/20">
+              Get Started
+            </Link>
+          )}
 
           {/* Mobile menu button */}
           <button
@@ -81,8 +103,20 @@ export default function Navbar() {
         <a onClick={() => setIsOpen(false)} className="block font-label text-on-surface hover:text-primary py-2 border-b border-outline-variant/20 transition-colors" href="#mission">Mission</a>
         <Link onClick={() => setIsOpen(false)} className="block font-label text-on-surface hover:text-primary py-2 border-b border-outline-variant/20 transition-colors" to="/find-food">Find Food</Link>
         <Link onClick={() => setIsOpen(false)} className="block font-label text-on-surface hover:text-primary py-2 border-b border-outline-variant/20 transition-colors" to="/register">List Surplus</Link>
-        <div className="pt-2">
-          <Link onClick={() => setIsOpen(false)} to="/login" className="font-label text-on-surface hover:text-primary transition-colors">Log In</Link>
+        <div className="pt-2 border-t border-outline-variant/20 mt-2">
+          {!user ? (
+            <>
+              <Link onClick={() => setIsOpen(false)} to="/login" className="block font-label text-on-surface hover:text-primary py-2 transition-colors">Log In</Link>
+              <Link onClick={() => setIsOpen(false)} to="/signup" className="block font-label text-on-surface hover:text-primary py-2 transition-colors">Sign Up</Link>
+            </>
+          ) : (
+            <>
+              {user.role === 'vendor' && (
+                <Link onClick={() => setIsOpen(false)} to="/vendor/dashboard" className="block font-label text-on-surface hover:text-primary py-2 transition-colors">Dashboard</Link>
+              )}
+              <button onClick={handleLogout} className="block w-full text-left font-label text-error hover:text-error/80 py-2 transition-colors">Log Out</button>
+            </>
+          )}
         </div>
       </div>
     </nav>

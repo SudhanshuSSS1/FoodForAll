@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function VendorInventory() {
+  const [items, setItems] = useState([]);
+  const { authFetch, user } = useAuth();
+
+  useEffect(() => {
+    fetchInventory();
+  }, []);
+
+  const fetchInventory = async () => {
+    try {
+      const res = await authFetch('/vendor/inventory');
+      if (res.ok) setItems(await res.json());
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const totalStock = items.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="bg-surface text-on-surface min-h-screen font-body pt-16">
       {/* SideNavBar Anchor */}
@@ -15,7 +34,7 @@ export default function VendorInventory() {
             />
           </div>
           <div>
-            <p className="font-label-md text-[14px] font-semibold text-on-surface">Green Grocers</p>
+            <p className="font-label-md text-[14px] font-semibold text-on-surface">{user?.shopName || 'Green Grocers'}</p>
             <p className="text-[10px] uppercase tracking-wider text-primary font-bold">Verified Vendor</p>
           </div>
         </div>
@@ -78,17 +97,17 @@ export default function VendorInventory() {
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-primary hover:bg-surface-container transition-colors">
             <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Total Stock</span>
             <div className="flex items-end justify-between mt-4">
-              <span className="font-display-lg text-[48px] font-bold text-primary leading-none">1,284</span>
+              <span className="font-display-lg text-[48px] font-bold text-primary leading-none">{totalStock}</span>
               <span className="text-primary-dim text-[12px] font-medium flex items-center mb-1 bg-primary-dim/10 px-2 py-0.5 rounded-full">
-                <span className="material-symbols-outlined text-[14px] mr-1">trending_up</span>+12%
+                Items
               </span>
             </div>
           </div>
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-tertiary hover:bg-surface-container transition-colors">
-            <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Ready to List</span>
+            <span className="text-on-surface-variant font-label-md text-[14px] font-semibold">Unique Items</span>
             <div className="flex items-end justify-between mt-4">
-              <span className="font-display-lg text-[48px] font-bold text-tertiary leading-none">42</span>
-              <span className="text-tertiary-fixed-dim text-[12px] font-medium mb-1 bg-tertiary-fixed-dim/10 px-2 py-0.5 rounded-full">High Priority</span>
+              <span className="font-display-lg text-[48px] font-bold text-tertiary leading-none">{items.length}</span>
+              <span className="text-tertiary-fixed-dim text-[12px] font-medium mb-1 bg-tertiary-fixed-dim/10 px-2 py-0.5 rounded-full">Products</span>
             </div>
           </div>
           <div className="bg-surface-container/60 backdrop-blur-md border border-outline/20 p-6 rounded-3xl flex flex-col justify-between border-l-4 border-l-error hover:bg-surface-container transition-colors">
@@ -134,104 +153,44 @@ export default function VendorInventory() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-outline-variant/50">
-                {/* Row 1 */}
-                <tr className="hover:bg-primary/5 transition-colors group">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-surface-variant flex-shrink-0">
-                        <img alt="Bell Peppers" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNlykT06TD_bL4gF7JuKaXUBPvhpYQFyRtwUaDf0gDOsPG6ZhIf620vCVdGM3xk0K3fXZYm6OUBKey1W5vCEoEGa9vSWCcC0JI5L4o2ORp_GhFJyXiIsLgyLbjAiiSC_O7lVaUgMRgYA-56rIrFchBLnhNh51wNBy3TyZyuZc5Tt5gOlBS8RmA1_zYiErhJfb9pFnIW1RFtTth_6lgSuujIZqx8HdjLDVguZiYqDL99tgZS1NOxulpLhGMpQ5AOZ2gA9osnuKGnTK9" />
+                {items.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-4 text-center text-on-surface-variant">No items in inventory</td>
+                  </tr>
+                ) : items.map(item => (
+                  <tr key={item.id} className="hover:bg-primary/5 transition-colors group">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 rounded-xl overflow-hidden bg-surface-variant flex-shrink-0 flex items-center justify-center text-on-surface-variant">
+                          <span className="material-symbols-outlined">inventory_2</span>
+                        </div>
+                        <div>
+                          <span className="block font-label-md text-[14px] font-bold text-on-surface">{item.title}</span>
+                          <span className="text-[12px] font-medium text-on-surface-variant">SKU: {item.id}</span>
+                        </div>
                       </div>
-                      <div>
-                        <span className="block font-label-md text-[14px] font-bold text-on-surface">Organic Bell Peppers</span>
-                        <span className="text-[12px] font-medium text-on-surface-variant">SKU: VG-001</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-bold capitalize">{item.category || 'Other'}</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-2">
+                        <span className="font-body-md text-[16px] text-primary font-bold">{item.quantity}</span>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[12px] font-bold">Vegetables</span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-body-md text-[16px] text-primary font-bold">145 kg</span>
-                      <div className="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="bg-primary h-full w-[70%] rounded-full"></div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 font-body-md text-[16px] text-on-surface-variant">Today, 09:45 AM</td>
-                  <td className="px-6 py-4 text-right">
-                    <button className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-all group-hover:scale-110 cursor-pointer">
-                      <span className="material-symbols-outlined">edit</span>
-                    </button>
-                  </td>
-                </tr>
-                {/* Row 2 */}
-                <tr className="hover:bg-primary/5 transition-colors group">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-surface-variant flex-shrink-0">
-                        <img alt="Oranges" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTBEgSY4s7sLwNn1zn0ri8-dwD1o6SABx-vNofQ7JRAucBqOLFERGM2o2i2asSDKTwcv7H6qgnXB4AeU-9BR0zSWk18U1OPnRCFHLTnIIHOfLbPw-jgMR43alPx9qGIfmUtAD_t1z2K4BCktBo5RwoYR8iIUe5MNOA5dfzKbtPJL0iMYImXfjt29Vvc2QJ8NeDtemYcx1mGzAZAZt848B7ZT5iemc7fG-4maT6PrlR4pKOjBAWqJ2fIJZJDhkeFU2zT-OLuvCl6-n-" />
-                      </div>
-                      <div>
-                        <span className="block font-label-md text-[14px] font-bold text-on-surface">Navel Oranges</span>
-                        <span className="text-[12px] font-medium text-on-surface-variant">SKU: FR-042</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full text-[12px] font-bold">Fruits</span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-body-md text-[16px] text-error font-bold">12 kg</span>
-                      <div className="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="bg-error h-full w-[15%] rounded-full"></div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 font-body-md text-[16px] text-on-surface-variant">Oct 24, 2023</td>
-                  <td className="px-6 py-4 text-right">
-                    <button className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-all group-hover:scale-110 cursor-pointer">
-                      <span className="material-symbols-outlined">edit</span>
-                    </button>
-                  </td>
-                </tr>
-                {/* Row 3 */}
-                <tr className="hover:bg-primary/5 transition-colors group">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-surface-variant flex-shrink-0">
-                        <img alt="Sourdough" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq6R0xC6qbmFCf9MiQf_ymCIKXe0oldAISuRP9_B-Io5GmU_xO6fo8dk2b1p8EQ8xxBn4W1pGwSAegk-7rHvuNT6TAD8WkD_2KjetpKBM_srhqt21Y52K4q__cd3O2Wx7-D0ABINB7Dw4N9vNZiThZMC0CfJt3538ulmovXgYdWJZeACpDRwis_PNgQ2vkdNqqHJMUYHvTt9FCiTQI_l8hgUXbYyROCA6DnAhvAAiKVu5zxvcwXuCjThZCLkaLiEzg8HsvVIXNTFgw" />
-                      </div>
-                      <div>
-                        <span className="block font-label-md text-[14px] font-bold text-on-surface">Artisan Sourdough</span>
-                        <span className="text-[12px] font-medium text-on-surface-variant">SKU: BK-012</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-3 py-1 bg-outline-variant text-on-surface rounded-full text-[12px] font-bold">Bakery</span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="font-body-md text-[16px] text-primary font-bold">48 units</span>
-                      <div className="w-16 h-1.5 bg-surface-variant rounded-full overflow-hidden">
-                        <div className="bg-primary h-full w-[85%] rounded-full"></div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 font-body-md text-[16px] text-on-surface-variant">Today, 06:12 AM</td>
-                  <td className="px-6 py-4 text-right">
-                    <button className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-all group-hover:scale-110 cursor-pointer">
-                      <span className="material-symbols-outlined">edit</span>
-                    </button>
-                  </td>
-                </tr>
+                    </td>
+                    <td className="px-6 py-4 font-body-md text-[16px] text-on-surface-variant">{new Date(item.updatedAt).toLocaleDateString()}</td>
+                    <td className="px-6 py-4 text-right">
+                      <button className="p-2 text-primary hover:bg-primary/10 rounded-lg transition-all group-hover:scale-110 cursor-pointer">
+                        <span className="material-symbols-outlined">edit</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
           <div className="p-6 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
-            <p className="text-[12px] text-on-surface-variant">Showing 1 to 10 of 248 items</p>
+            <p className="text-[12px] text-on-surface-variant">Showing 1 to {items.length} of {items.length} items</p>
             <div className="flex items-center space-x-2">
               <button className="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant cursor-pointer">
                 <span className="material-symbols-outlined">chevron_left</span>
