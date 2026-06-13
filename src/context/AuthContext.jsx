@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   // Determine base URL (could be from env later, hardcoded to backend for now)
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = 'https://foodforallbackend.onrender.com/api';
 
   useEffect(() => {
     if (token) {
