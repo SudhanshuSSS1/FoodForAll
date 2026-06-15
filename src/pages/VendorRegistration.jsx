@@ -125,7 +125,7 @@ export default function VendorRegistration() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Full Name</label>
-              <input name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" placeholder="Alex Rivers" type="text" />
+              <input name="fullName" value={formData.fullName} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" type="text" />
             </div>
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Date of Birth</label>
@@ -136,11 +136,11 @@ export default function VendorRegistration() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Email ID</label>
-              <input name="email" value={formData.email} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" placeholder="alex@greenstore.com" type="email" />
+              <input name="email" value={formData.email} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" type="email" />
             </div>
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Phone Number</label>
-              <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" placeholder="+1 (555) 000-0000" type="tel" />
+              <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" type="tel" />
             </div>
           </div>
 
@@ -149,7 +149,7 @@ export default function VendorRegistration() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Shop Name</label>
-              <input name="shopName" value={formData.shopName} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" placeholder="Green Valley Grocers" type="text" />
+              <input name="shopName" value={formData.shopName} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none" type="text" />
             </div>
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Type of Shop</label>
@@ -166,7 +166,7 @@ export default function VendorRegistration() {
 
           <div className="space-y-1">
             <label className="font-label text-label-md text-on-surface-variant ml-1 block">Shop Address</label>
-            <textarea name="address" value={formData.address} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 resize-none outline-none" placeholder="123 Sustainability Way, Eco City, EC 40201" rows="2"></textarea>
+            <textarea name="address" value={formData.address} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 resize-none outline-none" rows="2"></textarea>
           </div>
 
           <hr className="border-outline-variant/30 my-8" />
@@ -175,7 +175,7 @@ export default function VendorRegistration() {
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Create Password</label>
               <div className="relative">
-                <input name="password" value={formData.password} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none pr-12" placeholder="••••••••" type={showPassword ? 'text' : 'password'} />
+                <input name="password" value={formData.password} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none pr-12" type={showPassword ? 'text' : 'password'} />
                 <span onClick={() => setShowPassword(!showPassword)} className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant cursor-pointer hover:text-primary transition-colors select-none">
                   {showPassword ? 'visibility_off' : 'visibility'}
                 </span>
@@ -184,7 +184,7 @@ export default function VendorRegistration() {
             <div className="space-y-1">
               <label className="font-label text-label-md text-on-surface-variant ml-1 block">Confirm Password</label>
               <div className="relative">
-                <input name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none pr-12" placeholder="••••••••" type={showConfirmPassword ? 'text' : 'password'} />
+                <input name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required className="w-full bg-surface-container-high border-none rounded-xl p-4 text-on-surface focus:ring-2 focus:ring-primary focus:shadow-[0_0_15px_rgba(110,255,132,0.3)] transition-all placeholder:text-outline/50 outline-none pr-12" type={showConfirmPassword ? 'text' : 'password'} />
                 <span onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline-variant cursor-pointer hover:text-primary transition-colors select-none">
                   {showConfirmPassword ? 'visibility_off' : 'visibility'}
                 </span>

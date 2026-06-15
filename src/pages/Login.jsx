@@ -80,7 +80,7 @@ export default function Login() {
               <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors ml-1 block" htmlFor="email">Email ID</label>
               <div className="relative rounded-xl focus-within:shadow-[0_0_15px_rgba(110,255,132,0.15)] transition-all">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">mail</span>
-                <input required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-3 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="email" placeholder="name@example.com" type="email" />
+                <input required value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-3 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="email" type="email" />
               </div>
             </div>
             
@@ -89,7 +89,7 @@ export default function Login() {
               <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors ml-1 block" htmlFor="password">Password</label>
               <div className="relative rounded-xl focus-within:shadow-[0_0_15px_rgba(110,255,132,0.15)] transition-all">
                 <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
-                <input required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-11 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="password" placeholder="••••••••" type={showPassword ? 'text' : 'password'} />
+                <input required value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-surface-container-highest border-none rounded-xl py-3 pl-11 pr-11 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary transition-all duration-200 outline-none" id="password" type={showPassword ? 'text' : 'password'} />
                 <button 
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary cursor-pointer select-none" 
                   onClick={() => setShowPassword(!showPassword)} 

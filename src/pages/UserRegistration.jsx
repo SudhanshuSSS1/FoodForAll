@@ -181,7 +181,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="fullname">Full Name</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">person</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="fullname" name="fullname" value={formData.fullname} onChange={handleChange} placeholder="Jane Doe" required type="text" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="fullname" name="fullname" value={formData.fullname} onChange={handleChange} required type="text" />
                   </div>
                 </div>
                 {/* Date of Birth */}
@@ -197,7 +197,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="email">Email ID</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">mail</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="jane@example.com" required type="email" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="email" name="email" value={formData.email} onChange={handleChange} required type="email" />
                   </div>
                 </div>
                 {/* Phone Number */}
@@ -205,7 +205,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="phone">Phone Number</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">call</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" required type="tel" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="phone" name="phone" value={formData.phone} onChange={handleChange} required type="tel" />
                   </div>
                 </div>
                 {/* Address */}
@@ -213,7 +213,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="address">Address</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">location_on</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="address" name="address" value={formData.address} onChange={handleChange} placeholder="123 Kindness Way, Green City" required type="text" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="address" name="address" value={formData.address} onChange={handleChange} required type="text" />
                   </div>
                 </div>
                 {/* Create Password */}
@@ -221,7 +221,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="password">Create Password</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">lock</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="password" name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" required type="password" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="password" name="password" value={formData.password} onChange={handleChange} required type="password" />
                   </div>
                 </div>
                 {/* Confirm Password */}
@@ -229,7 +229,7 @@ export default function UserRegistration() {
                   <label className="font-label text-label-md text-on-surface-variant group-focus-within:text-primary transition-colors" htmlFor="confirm_password">Confirm Password</label>
                   <div className="relative flex items-center rounded-xl bg-surface-container-low border border-outline-variant focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(110,255,132,0.2)] transition-all">
                     <span className="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary">verified_user</span>
-                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="confirm_password" name="confirm_password" value={formData.confirm_password} onChange={handleChange} placeholder="••••••••" required type="password" />
+                    <input className="w-full bg-transparent border-none focus:ring-0 text-on-surface py-3 pl-10 pr-3 placeholder:text-outline/50 outline-none" id="confirm_password" name="confirm_password" value={formData.confirm_password} onChange={handleChange} required type="password" />
                   </div>
                 </div>
               </div>
