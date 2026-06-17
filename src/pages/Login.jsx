@@ -18,7 +18,7 @@ export default function Login() {
     setAuthStatus('authenticating');
     setErrorMsg('');
     
-    const result = await login(email, password);
+    const result = await login(email, password, role);
     
     if (result.success) {
       setAuthStatus('success');

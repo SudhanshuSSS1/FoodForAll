@@ -255,7 +255,7 @@ export default function UserRegistration() {
               </button>
               
               <p className="text-center font-label text-label-md text-on-surface-variant pt-2">
-                Already have an account? <Link className="text-tertiary font-bold hover:text-tertiary-fixed-dim transition-colors" to="#">Log In</Link>
+                Already have an account? <Link className="text-tertiary font-bold hover:text-tertiary-fixed-dim transition-colors" to="/login">Log In</Link>
               </p>
             </form>
           </div>

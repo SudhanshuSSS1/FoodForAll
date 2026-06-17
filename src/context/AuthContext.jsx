@@ -43,15 +43,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (email, password) => {
+  const login = async (email, password, selectedRole) => {
     try {
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password, role: selectedRole })
       });
       const data = await response.json();
       if (response.ok) {
+        if (selectedRole && data.user.role !== selectedRole) {
+          return { success: false, message: `Access denied. Please log in as a ${data.user.role === 'vendor' ? 'Food Vendor' : 'Community Member'}.` };
+        }
         setToken(data.token);
         setUser(data.user);
         return { success: true, role: data.user.role };

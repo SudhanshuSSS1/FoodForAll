@@ -219,7 +219,7 @@ export default function VendorRegistration() {
           </button>
 
           <p className="text-center text-caption text-on-surface-variant pt-2">
-            Already a vendor? <Link to="#" className="text-tertiary-fixed font-bold hover:underline">Log in to your dashboard</Link>
+            Already a vendor? <Link to="/login" className="text-tertiary-fixed font-bold hover:underline">Log in to your dashboard</Link>
           </p>
         </form>
       </section>
